@@ -1,16 +1,81 @@
-* {
+/* styles/reset.css */
+
+/* 全体のリセット */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-html,
+/* HTML5要素のスタイルをリセット */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+  display: block;
+}
+
+/* bodyのリセット */
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  line-height: 1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* リストスタイルのリセット */
+ol,
+ul {
+  list-style: none;
+}
+
+/* 引用ブロックのリセット */
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: '';
+  content: none;
+}
+
+/* テーブルのスタイルのリセット */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* アンカータグのスタイルのリセット */
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* イメージのスタイルのリセット */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* フォーム要素のスタイルのリセット */
+button,
+input,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
