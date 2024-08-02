@@ -2,6 +2,11 @@ import React from 'react'
 import styles from "./home.module.css"
 import Image from 'next/image'
 import dummy from "/public/Rectangle.png"
+import searchIcon from "/public/search_icon.svg"
+
+type Props ={
+  number:number[]
+}
 
 const page = () => {
 
@@ -17,12 +22,21 @@ const page = () => {
     { title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "記事内容9" },
   ];
 
+
+
+
+
+
   return (
     <>
       <main className={styles.main}>
 
         <div className={styles.search}>
           <input type="text" placeholder="記事の検索" />
+
+          <button type='submit' className={styles.searchIcon}>
+          <Image src={searchIcon} width={24} height={24} alt=''/>
+          </button>
         </div>
 
         <div className={styles.container}>
@@ -55,10 +69,19 @@ const page = () => {
 
 
           <div className={styles.pageNation}>
+
             <a href="" className={styles.pageNation_prev}>
               <p>← Prev Page</p>
             </a>
             <div className={styles.pageNum}>
+              {/* {pageNationArray.map(()=>{
+
+              })} */}
+
+
+
+
+
               <div className={`${styles.active} ${styles.num}`}>
                 <a href="">1</a>
               </div>
