@@ -1,0 +1,9 @@
+.morePosts{
+    @apply mt-12;
+}
+
+.morePosts h3{
+    @apply font-bold;
+    font-size: 22px;
+    margin-top: 11px;
+}
