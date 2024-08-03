@@ -11,61 +11,192 @@ const SignUp: () => React.JSX.Element = () => {
   return (
     <div className="absolute top-0 left-0">
       <div className="w-screen h-screen relative">
-        <div className="w-screen h-screen bg-black opacity-50"></div>
+        <div className="w-screen h-screen bg-black opacity-50 hidden md:block"></div>
         <form
-          className="max-w-792 px-1 bg-white rounded-3xl absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%] px-[60px] pt-[28px] pb-[112px]"
+          className="
+          bg-white
+          w-full
+          box-border
+          px-[calc(100vw*(15/350))]
+          pt-[calc(100vw*(120/350))]
+          pb-[calc(100vw*(200/350))]
+
+          md:w-fit
+          md:rounded-2xl
+          md:absolute
+          md:top-1/2
+          md:left-1/2
+          md:transform
+          md:translate-x-[-50%]
+          md:translate-y-[-50%]
+          md:px-[50px]
+          md:pt-[28px]
+          md:pb-[12px]"
         >
           <p className={`
             ${poppins.className}
             font-semibold
-            text-3xl
             w-fit
             mx-auto
+            relative
+            underline
+            text-[calc(100vw*(27/350))]
+
+            md:text-3xl
             `}>Sign Up</p>
 
-          <div>
-            <label htmlFor='name'>Name</label>
+          <div className="
+            w-full
+            mt-[calc(100vw*(38/350))]
+
+            md:w-[470px]
+            md:mt-[14px]
+          ">
+            <label htmlFor='name' className={`
+              ${poppins.className}
+              w-fit
+              text-[calc(100vw*(15/350))]
+              mx-[calc(100vw*(6/350))]
+
+              md:text-[18px]
+              md:mx-[8px]
+            `}>Name</label>
             <input
-              className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight
-          focus:outline-none"
+              className="
+                bg-[#e3e3e3]
+                rounded-2xl
+                border-[1px]
+                border-black
+                placeholder-[#5b5b5b]
+                w-[100%]
+                mt-[calc(100vw*(9/350))]
+                px-[calc(100vw*(10/350))]
+                py-[calc(100vw*(8/350))]
+
+                md:mt-[6px]
+                md:px-[10px]
+                md:py-[15px]
+              "
               type="text"
               name='name'
               placeholder="Enter your name"
             />
           </div>
 
-          <div>
-            <label htmlFor='email'>Email</label>
+          <div className="
+            w-full
+            mt-[calc(100vw*(23/350))]
+
+            md:w-[470px]
+            md:mt-[14px]
+          ">
+            <label htmlFor='email' className={`
+              ${poppins.className}
+              w-fit
+              text-[calc(100vw*(15/350))]
+              mx-[calc(100vw*(6/350))]
+
+              md:text-[18px]
+              md:mx-[8px]
+            `}>Email</label>
             <input
-              className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight
-          focus:outline-none"
+              className="
+                bg-[#e3e3e3]
+                rounded-2xl
+                border-[1px]
+                border-black
+                placeholder-[#5b5b5b]
+                w-[100%]
+                mt-[calc(100vw*(9/350))]
+                px-[calc(100vw*(10/350))]
+                py-[calc(100vw*(8/350))]
+
+                md:mt-[6px]
+                md:px-[10px]
+                md:py-[15px]
+              "
               type="text"
               name='email'
               placeholder="Enter your email"
             />
           </div>
 
-          <div>
-            <label htmlFor='password '>Password </label>
+          <div className="
+            w-full
+            mt-[calc(100vw*(23/350))]
+
+            md:w-[470px]
+            md:mt-[14px]
+          ">
+            <label htmlFor='password' className={`
+              ${poppins.className}
+              w-fit
+              text-[calc(100vw*(15/350))]
+              mx-[calc(100vw*(6/350))]
+
+              md:text-[18px]
+              md:mx-[8px]
+            `}>Password </label>
             <input
-              className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight
-          focus:outline-none"
+              className="
+                bg-[#e3e3e3]
+                rounded-2xl
+                border-[1px]
+                border-black
+                placeholder-[#5b5b5b]
+                w-[100%]
+                mt-[calc(100vw*(9/350))]
+                px-[calc(100vw*(10/350))]
+                py-[calc(100vw*(8/350))]
+
+                md:mt-[6px]
+                md:px-[10px]
+                md:py-[15px]
+              "
               type="text"
               name='password'
               placeholder="Enter your password"
             />
           </div>
 
-          <button
-            className="duration-150 flex-shrink-0 bg-blue-500 hover:bg-blue-700 border-blue-500 hover:border-blue-700 text-sm border-4 text-white py-1 px-2 rounded"
-            type="submit"
-          >
-            Sign Up
-          </button>
+          <div className="
+            w-[100%]
+            flex
+            justify-center
+            mt-[36px]
+          ">
+            <button
+              className="
+                text-white
+                bg-[#3094d2]
+                rounded-[calc(100vw*(47/350))]
+                text-[calc(100vw*(16/350))]
+                px-[calc(100vw*(28/350))]
+                py-[calc(100vw*(10/350))]
+
+                md:rounded-[58px]
+                md:text-[20px]
+                md:px-[42px]
+                md:py-[14px]
+              "
+              type="submit"
+            >
+              Sign Up
+            </button>
+          </div>
 
           <div>
-            <p>Already  have an account ?</p>
-            <button onClick={signIn}>Sign in</button>
+            <p className={`
+              ${poppins.className}
+              text-center
+              font-semibold
+              text=[calc(100vw*(12/350))]
+              mt-[calc(100vw*(26/350))]
+
+              md:text=[12px]
+              md:mt-[16px]
+            `}
+            >Already  have an account ? <span className="text-[#3094d2]" onClick={signIn}>Sign in</span></p>
           </div>
         </form>
       </div>
