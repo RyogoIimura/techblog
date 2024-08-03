@@ -1,15 +1,27 @@
+'use client';
 import React, { useState } from "react";
 
+import { poppins } from "../utils/fonts";
+
 const SignUp: () => React.JSX.Element = () => {
+  const signIn = () => {
+    console.log('signIn open');
+  }
 
   return (
     <div className="absolute top-0 left-0">
       <div className="w-screen h-screen relative">
         <div className="w-screen h-screen bg-black opacity-50"></div>
         <form
-          className="max-w-792 px-1 bg-white rounded-3xl absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%]"
+          className="max-w-792 px-1 bg-white rounded-3xl absolute top-1/2 left-1/2 transform translate-x-[-50%] translate-y-[-50%] px-[60px] pt-[28px] pb-[112px]"
         >
-          <p>Sign Up</p>
+          <p className={`
+            ${poppins.className}
+            font-semibold
+            text-3xl
+            w-fit
+            mx-auto
+            `}>Sign Up</p>
 
           <div>
             <label htmlFor='name'>Name</label>
@@ -53,7 +65,7 @@ const SignUp: () => React.JSX.Element = () => {
 
           <div>
             <p>Already  have an account ?</p>
-            <button>Sign in</button>
+            <button onClick={signIn}>Sign in</button>
           </div>
         </form>
       </div>
