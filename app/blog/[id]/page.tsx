@@ -13,8 +13,11 @@ const BlogView = () => {
         <title>Blog Title</title>
       </Head>
       <main>
+        {/** メインコンテンツ */}
         <BlogContents />
+        {/** その他の記事一覧 */}
         <MorePosts />
+        {/** コメント一覧 */}
         <Comments />
       </main>
     </>

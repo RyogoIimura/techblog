@@ -66,6 +66,7 @@ const getLabelTime = (date: Date): string => {
   return "a min ago";
 };
 
+// ダミーコメント
 const sampleComments: Array<PostCommentsType> = [
   {
     id: "1",
@@ -110,6 +111,7 @@ const Comments: FC<Record<string, never>> = React.memo(() => {
   };
   return (
     <section className="blogComments">
+      {/** コメント一覧のセクション */}
       <h2>Comments</h2>
       <div className="flex gap-9 mt-7">
         <input
@@ -122,6 +124,7 @@ const Comments: FC<Record<string, never>> = React.memo(() => {
         <button onClick={handleAddComment}>Comment</button>
       </div>
       <div className="mt-7 flex flex-col gap-9">
+        {/** コメント一覧のループ  */}
         {comments.map((comment) => (
           <CommentItem
             key={comment.id}

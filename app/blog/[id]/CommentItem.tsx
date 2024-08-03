@@ -32,6 +32,7 @@ const CommentItem: FC<Props> = React.memo((props) => {
       className="flex gap-11 p-5"
       style={{ background: "rgba(196, 196, 196, 0.3)" }}
     >
+      {/** アイコン */}
       <div className="shrink-0">
         <Image
           src={image_path}
@@ -45,10 +46,13 @@ const CommentItem: FC<Props> = React.memo((props) => {
             borderRadius: "50%",
           }}
         />
+        {/** ユーザー名 */}
         <h3 className="font-normal text-lg mt-2.5 text-lg">{user_id}</h3>
       </div>
       <div className="flex-1">
+        {/** コメント */}
         <p>{content}</p>
+        {/** コメント投稿日(何分前みたいな表示) */}
         <time dateTime={dateTime} style={{ color: "rgba(24, 160, 251, 0.5)" }}>
           {labelTime}
         </time>

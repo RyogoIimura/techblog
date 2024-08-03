@@ -16,6 +16,7 @@ type PostsType = {
 
 type MorePosts = Pick<PostsType, "id" | "image_path" | "title">;
 
+// ダミー記事
 const samplePosts: Array<MorePosts> = [
   {
     id: "1",
@@ -37,8 +38,10 @@ const samplePosts: Array<MorePosts> = [
 const MorePosts: FC<Record<string, never>> = React.memo(() => {
   return (
     <section className="morePosts">
+      {/** その他の記事一覧セクション */}
       <h2 className="text-2xl">More Posts</h2>
       <div className="grid md:grid-cols-3 gap-5 md:gap-40 mt-7">
+        {/** その他の記事一覧のループ */}
         {samplePosts.map((post) => (
           <MorePostItem
             key={post.id}

@@ -6,11 +6,11 @@ import "./BlogContents.modules.css";
 const BlogContents: FC<Record<string, never>> = React.memo(() => {
   return (
     <article className="blogArticle">
+      {/** ブログタイトル */}
       <header className="flex justify-center md:justify-between">
         <h1>Blog Title</h1>
         <div className="hidden md:block rounded-full w-24 h-24 overflow-hidden">
           <Image
-            //className="hidden md:block rounded-full"
             src="https://picsum.photos/200/300"
             alt=""
             width="96"
@@ -19,7 +19,9 @@ const BlogContents: FC<Record<string, never>> = React.memo(() => {
           />
         </div>
       </header>
+
       <div className="mt-7">
+        {/**  キービジュアル */}
         <div>
           <Image
             src="https://picsum.photos/1200/700"
@@ -32,6 +34,7 @@ const BlogContents: FC<Record<string, never>> = React.memo(() => {
         </div>
 
         <div className="content mt-12">
+          {/** メインコンテンツ */}
           <p>
             ここに文章が入ります。
             <br />

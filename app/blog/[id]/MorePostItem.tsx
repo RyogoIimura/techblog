@@ -18,6 +18,7 @@ const MorePostItem: FC<MorePosts> = React.memo((props) => {
   const { image_path, title } = props;
   return (
     <article>
+      {/** 他の記事アイテム */}
       <Image
         src={image_path}
         alt=""
