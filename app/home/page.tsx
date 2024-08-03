@@ -4,25 +4,26 @@ import Image from 'next/image'
 import dummy from "/public/Rectangle.png"
 import searchIcon from "/public/search_icon.svg"
 
-type Props ={
-  number:number[]
+type Props = {
+  number: number[]
 }
 
 const page = () => {
 
   const testArray = [
-    { title: "PostTitle1", category: "Category1", author: "Author1", time: "0 min ago", description: "記事内容1" },
-    { title: "PostTitle2", category: "Category2", author: "Author2", time: "5 min ago", description: "記事内容2" },
-    { title: "PostTitle3", category: "Category3", author: "Author3", time: "10 min ago", description: "記事内容3" },
-    { title: "PostTitle4", category: "Category1", author: "Author1", time: "0 min ago", description: "記事内容4" },
-    { title: "PostTitle5", category: "Category2", author: "Author2", time: "5 min ago", description: "記事内容5" },
-    { title: "PostTitle6", category: "Category3", author: "Author3", time: "10 min ago", description: "記事内容6" },
-    { title: "PostTitle7", category: "Category7", author: "Author1", time: "0 min ago", description: "記事内容7" },
-    { title: "PostTitle8", category: "Category8", author: "Author2", time: "5 min ago", description: "記事内容8" },
-    { title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "記事内容9" },
+    { title: "PostTitle1", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle2", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle3", category: "Category3", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle4", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle5", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle6", category: "Category3", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle7", category: "Category7", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle8", category: "Category8", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+    { title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
   ];
 
 
+  const pageNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 
 
@@ -30,12 +31,11 @@ const page = () => {
   return (
     <>
       <main className={styles.main}>
-
-        <div className={styles.search}>
-          <input type="text" placeholder="記事の検索" />
-
-          <button type='submit' className={styles.searchIcon}>
-          <Image src={searchIcon} width={24} height={24} alt=''/>
+        <div className={styles.searchBox}>
+          <input type="text" placeholder="検索ワード" />
+          <button type="submit">
+            {/* <i className={styles.fa-search}></i> */}
+            <Image src={searchIcon} width={24} height={24} alt='' />
           </button>
         </div>
 
@@ -48,13 +48,13 @@ const page = () => {
                 <a href="">
                   <Image src={dummy} width={467} height={304} alt="" />
                   <div className={styles.postItem_inner}>
-                    <div className={styles.title}>
-                      <p>{item.title}</p>
-                      <p>{item.category}</p>
+                    <div className={`${styles.title} mb-8`}>
+                      <h3>{item.title}</h3>
+                      <p className={styles.txtBlue}>{item.category}</p>
                     </div>
                     <div className={styles.status}>
-                      <p>{item.author}</p>
-                      <p className={styles.time}>{item.time}</p>
+                      <p className={styles.txtBlue}>{item.author}</p>
+                      <p className={`${styles.time} ${styles.txtBlue}`}>{item.time}</p>
                     </div>
                     <p className="description">
                       {item.description}
@@ -81,42 +81,12 @@ const page = () => {
 
 
 
-
-              <div className={`${styles.active} ${styles.num}`}>
-                <a href="">1</a>
-              </div>
-              <div className={`${styles.num}`}>
-                <a href="">2</a>
-              </div>
-              <div className={`${styles.num}`}>
-                <a href="">3</a>
-              </div>
-
-              <div className={styles.pc_only}>
-                <div className={`${styles.num}`}>
-                  <a href="">4</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">4</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">5</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">6</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">7</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">8</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">9</a>
-                </div>
-                <div className={`${styles.num}`}>
-                  <a href="">10</a>
-                </div>
+              <div className={styles.pageNation}>
+                {pageNum.map((num, index) => (
+                  <div key={index} className={styles.num}>
+                    <a href={`/?page=${num}`}>{num}</a>
+                  </div>
+                ))}
               </div>
 
 

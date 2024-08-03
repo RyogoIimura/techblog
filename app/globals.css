@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 /* styles/reset.css */
 
 /* 全体のリセット */

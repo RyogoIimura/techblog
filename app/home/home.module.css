@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .main {
   padding: 20px;
 }
@@ -10,45 +14,69 @@
 
 
 
+.txtBlue{
+  color: #18A0FB;
+}
+
+
 .container {
   max-width: 980px;
   margin: 0 auto;
 }
-.search{
-  margin-bottom: 40px;
-}
+
 
 
 /* 検索バー */
-.search input{
-  background-color: rgba(197, 197, 197, 0.48);
-  height: 40px;
-  max-width: 500px;
-
-
-  border-radius: 40px;
+.searchBox {
   display: block;
   margin: 0 auto;
-  padding-left: 40px;
-  border: none;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 40px;
+
+  height: 40px;
+  max-width: 500px;
 }
 
-.search input::placeholder{
-  position: relative;
+.searchBox input[type="text"] {
+  flex-grow: 1;
+  padding: 0.7rem 0 0.7rem 0.8rem;
+  background-color: rgba(197, 197, 197, 0.48);
+  border-radius: 40px;
+  border: none;
+  padding: 2px;
+  padding-left: 10px;
 }
+
 
 @media screen and (max-width:767px){
-  .search input{
+  .searchBo input{
     max-width: 200px;
   }
 }
 
-
-.searchIcon{
+.searchBox button {
   position: absolute;
+  top: -0.05rem;
+  right: 0;
+  cursor: pointer;
+  padding: .8rem .9rem .8rem .8rem;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 1rem;
+  transition: 0.5s;
 }
 
+.searchBox input:focus {
+  outline: 0;
+}
 
+.searchBox button:hover {
+  color: #4eadb8;
+  transform: scale(1.2);
+}
 
 
 
@@ -80,12 +108,15 @@
 .postItem .title{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
-.postItem .title p{}
+
 
 .postItem .status{
   display: flex;
-  justify-content: space-between;
+gap: 10px;
+
+  margin-bottom: 8px;
 }
 
 
@@ -161,3 +192,12 @@
   display: block;
   text-align: center;
 }
+
+
+
+
+
+
+
+
+
