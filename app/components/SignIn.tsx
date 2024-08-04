@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { poppins } from "../utils/fonts";
 import FormInput from "./FormInput";
 
-const SignUp: () => React.JSX.Element = () => {
-  const signUp = () => {
-    console.log('signUp open');
+const SignIn: () => React.JSX.Element = () => {
+  const signIn = () => {
+    console.log('signIn open');
   }
 
   return (
@@ -32,7 +32,7 @@ const SignUp: () => React.JSX.Element = () => {
           md:translate-y-[-50%]
           md:px-[50px]
           md:pt-[28px]
-          md:pb-[12px]"
+          md:pb-[82px]"
         >
           <p className={`
             ${poppins.className}
@@ -44,12 +44,9 @@ const SignUp: () => React.JSX.Element = () => {
             text-[calc(100vw*(60/750))]
 
             md:text-3xl
-            `}>Sign Up</p>
+            `}>Sign In</p>
 
           <div className={`w-full mt-[calc(100vw*(64/750))] md:w-[470px] md:mt-[36px]`}>
-            <FormInput role='name' />
-          </div>
-          <div className={`w-full mt-[calc(100vw*(34/750))] md:w-[470px] md:mt-[14px]`}>
             <FormInput role='email' />
           </div>
           <div className={`w-full mt-[calc(100vw*(34/750))] md:w-[470px] md:mt-[14px]`}>
@@ -84,7 +81,7 @@ const SignUp: () => React.JSX.Element = () => {
 
                 md:text-[20px]
               `}
-              >Sign Up</p>
+              >Sign In</p>
             </button>
           </div>
 
@@ -99,7 +96,7 @@ const SignUp: () => React.JSX.Element = () => {
               md:text-[12px]
               md:mt-[16px]
             `}
-            >Already  have an account ? <span className="text-[#3094d2] cursor-pointer" onClick={signUp}>Sign in</span></p>
+            >Already  have an account ? <span className="text-[#3094d2] cursor-pointer" onClick={signIn}>Sign Up</span></p>
           </div>
         </form>
       </div>
@@ -107,4 +104,4 @@ const SignUp: () => React.JSX.Element = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
