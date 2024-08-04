@@ -1,0 +1,24 @@
+.blogArticle {
+  @apply border;
+  @apply border-solid;
+  @apply border-black;
+  background: rgba(217, 217, 217, 0.57);
+  border-radius: 2rem;
+  padding: 49.5px 61.5px;
+}
+
+.blogArticle h1 {
+  @apply font-bold;
+  font-size: 55px;
+}
+
+@media screen and (max-width: 768px) {
+  .blogArticle {
+    padding: 20px 5vw;
+  }
+
+  .blogArticle h1 {
+    @apply font-bold;
+    font-size: 2rem;
+  }
+}

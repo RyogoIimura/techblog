@@ -1,0 +1,12 @@
+main {
+  width: min(90vw, 1320px);
+  margin: 0 auto;
+  letter-spacing: -1.5%;
+  padding: 60px 0;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding: 0;
+  }
+}
