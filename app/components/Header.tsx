@@ -201,7 +201,7 @@ const Header = (props: HeaderProps) => {
             md:pr-0
           `}
           >
-            <div className={`
+            <button className={`
               w-fit
               h-fit
               bg-[#383838]
@@ -223,7 +223,7 @@ const Header = (props: HeaderProps) => {
                 md:text-[14px]
                 md:block
               `}>Home</p>
-            </div>
+            </button>
             {headerButtonChange()}
           </div>
         </div>
@@ -250,7 +250,7 @@ const Header = (props: HeaderProps) => {
           transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        <div className={`
+        <button className={`
           w-fit
           h-fit
           bg-[#383838]
@@ -270,7 +270,7 @@ const Header = (props: HeaderProps) => {
             md:text-[14px]
             md:block
           `}>Home</p>
-        </div>
+        </button>
         {navButtonChange()}
       </div>
       <button className={`
