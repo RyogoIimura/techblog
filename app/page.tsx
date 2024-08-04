@@ -7,10 +7,7 @@ import Header from "./components/Header";
 export default function Home() {
   return (
     <>
-      <Header page='Profile' />
       <div>Hello World!</div>
-      <SignUp />
-      <SignIn />
     </>
   );
 }
