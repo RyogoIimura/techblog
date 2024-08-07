@@ -12,7 +12,7 @@ const page = () => {
 
   const testArray = [
     { title: "PostTitle1", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { title: "PostTitle2", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
+  { title: "PostTitle2", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
     { title: "PostTitle3", category: "Category3", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
     { title: "PostTitle4", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
     { title: "PostTitle5", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
@@ -22,10 +22,7 @@ const page = () => {
     { title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
   ];
 
-
   const pageNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-
 
 
   return (
@@ -61,26 +58,15 @@ const page = () => {
                     </p>
                   </div>
                 </a>
-
               </li>
             ))}
           </ul>
-
-
-
           <div className={styles.pageNation}>
 
             <a href="" className={styles.pageNation_prev}>
               <p>← Prev Page</p>
             </a>
             <div className={styles.pageNum}>
-              {/* {pageNationArray.map(()=>{
-
-              })} */}
-
-
-
-
               <div className={styles.pageNation}>
                 {pageNum.map((num, index) => (
                   <div key={index} className={styles.num}>
@@ -88,14 +74,15 @@ const page = () => {
                   </div>
                 ))}
               </div>
-
-
             </div>
             <a href="" className={styles.pageNation_next}>
               <p>Next Page →</p>
             </a>
           </div>
         </div>
+
+        <p className="mb-20">テスト</p>
+
       </main>
 
     </>
