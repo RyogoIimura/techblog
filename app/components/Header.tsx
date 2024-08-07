@@ -16,20 +16,22 @@ const Header = (props: HeaderProps) => {
     if( name === 'Create'){
       return (
         <button className={`
-          w-fit
-          h-fit
-          bg-[#383838]
-          border-[1px]
-          border-[#383838]
-          rounded-[57px]
-          pl-[36px]
-          pr-[18px]
-          py-[6px]
-          my-auto
-          relative
+            w-fit
+            h-fit
+            bg-[#383838]
+            border-[1px]
+            border-[#383838]
+            rounded-[57px]
+            pl-[36px]
+            pr-[18px]
+            py-[6px]
+            my-auto
+            relative
 
-          md:ml-[24px]
-        `}>
+            md:ml-[24px]
+          `}
+          key='Create'
+        >
           <Image
             className={`
               w-[14px]
@@ -56,19 +58,21 @@ const Header = (props: HeaderProps) => {
     if( name === 'Sign In'){
       return (
         <button className={`
-          w-fit
-          h-fit
-          bg-[#d9d9d9]
-          border-[1px]
-          border-[#383838]
-          rounded-[57px]
-          px-[28px]
-          py-[6px]
+            w-fit
+            h-fit
+            bg-[#d9d9d9]
+            border-[1px]
+            border-[#383838]
+            rounded-[57px]
+            px-[28px]
+            py-[6px]
 
-          md:my-auto
-          md:ml-[24px]
-          ${hidden ? 'hidden md:block' : ''}
-        `}>
+            md:my-auto
+            md:ml-[24px]
+            ${hidden ? 'hidden md:block' : ''}
+          `}
+          key='Sign In'
+        >
           <p className={`
             ${poppins.className}
             text-[#383838]
@@ -82,18 +86,20 @@ const Header = (props: HeaderProps) => {
     if( name === 'Publish'){
       return (
         <button className={`
-          w-fit
-          h-fit
-          bg-[#18A0FB]
-          border-[1px]
-          border-[#18A0FB]
-          rounded-[57px]
-          px-[28px]
-          py-[6px]
-          my-auto
+            w-fit
+            h-fit
+            bg-[#18A0FB]
+            border-[1px]
+            border-[#18A0FB]
+            rounded-[57px]
+            px-[28px]
+            py-[6px]
+            my-auto
 
-          md:ml-[24px]
-        `}>
+            md:ml-[24px]
+          `}
+          key='Publish'
+        >
           <p className={`
             ${poppins.className}
             text-[#000]
@@ -107,13 +113,15 @@ const Header = (props: HeaderProps) => {
     if( name === 'Logout'){
       return (
         <button className={`
-          w-fit
-          h-fit
+            w-fit
+            h-fit
 
-          md:my-auto
-          md:ml-[48px]
-          ${hidden ? 'hidden md:block' : ''}
-        `}>
+            md:my-auto
+            md:ml-[48px]
+            ${hidden ? 'hidden md:block' : ''}
+          `}
+          key='Logout'
+        >
           <Image
             className={`
               w-[48px]
