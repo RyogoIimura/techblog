@@ -1,27 +1,21 @@
-
 .main {
   padding: 20px;
 }
 
 @media screen and (max-width:767px){
-  .main{
+  .main {
     padding: 16px;
   }
 }
-
-
 
 .txtBlue{
   color: #18A0FB;
 }
 
-
 .container {
   max-width: 980px;
   margin: 0 auto;
 }
-
-
 
 /* 検索バー */
 .searchBox {
@@ -31,7 +25,6 @@
   display: flex;
   width: 100%;
   margin-bottom: 40px;
-
   height: 40px;
   max-width: 500px;
 }
@@ -46,9 +39,8 @@
   padding-left: 10px;
 }
 
-
 @media screen and (max-width:767px){
-  .searchBo input{
+  .searchBox input {
     max-width: 200px;
   }
 }
@@ -75,8 +67,6 @@
   transform: scale(1.2);
 }
 
-
-
 /* 記事一覧 */
 .postWrap {
   display: flex;
@@ -93,7 +83,6 @@
   }
 }
 
-
 .postItem {
   border: 1px solid #333;
   border-radius: 10px;
@@ -102,32 +91,29 @@
   margin-bottom: 40px;
 }
 
-.postItem .title{
+.postItem .title {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
-
-.postItem .status{
+.postItem .status {
   display: flex;
-gap: 10px;
-
+  gap: 10px;
   margin-bottom: 8px;
 }
 
-
 @media screen and (max-width:768px){
-  .postItem{
+  .postItem {
     width: 40%;
   }
 }
 
 @media screen and (max-width:420px){
-  .postWrap{
+  .postWrap {
     display: block;
   }
-  .postItem{
+  .postItem {
     width: 100%;
     margin-bottom: 40px;
   }
@@ -146,21 +132,19 @@ gap: 10px;
   gap: 20px;
 }
 
-.pc_only{
+.pc_only {
   display: block;
 }
 @media screen and (max-width:768px){
-  .pc_only{
+  .pc_only {
     display: none;
   }
 }
 
 /* ページネーション */
-
 .pageNation .pageNation_prev,
-.pageNation .pageNation_next
-{
-  font-weight:bold;
+.pageNation .pageNation_next {
+  font-weight: bold;
 }
 
 .pageNum {
@@ -177,7 +161,7 @@ gap: 10px;
   border-radius: 50%;
   background-color: white;
   font-weight: bold;
-  border: 1px solid rgba(221, 221, 221, 1)  ;
+  border: 1px solid rgba(221, 221, 221, 1);
 }
 
 .pageNum .num.active {
@@ -189,12 +173,3 @@ gap: 10px;
   display: block;
   text-align: center;
 }
-
-
-
-
-
-
-
-
-

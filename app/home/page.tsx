@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "./home.module.css"
+import styles from "./home.module.css";
 import Image from 'next/image'
 import dummy from "/public/Rectangle.png"
 import searchIcon from "/public/search_icon.svg"
@@ -8,7 +8,7 @@ type Props = {
   number: number[]
 }
 
-const page = () => {
+const Page = () => {
 
   const testArray = [
     { title: "PostTitle1", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
@@ -89,4 +89,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
