@@ -1,0 +1,175 @@
+.main {
+  padding: 20px;
+}
+
+@media screen and (max-width:767px){
+  .main {
+    padding: 16px;
+  }
+}
+
+.txtBlue{
+  color: #18A0FB;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* 検索バー */
+.searchBox {
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 40px;
+  height: 40px;
+  max-width: 500px;
+}
+
+.searchBox input[type="text"] {
+  flex-grow: 1;
+  padding: 0.7rem 0 0.7rem 0.8rem;
+  background-color: rgba(197, 197, 197, 0.48);
+  border-radius: 40px;
+  border: none;
+  padding: 2px;
+  padding-left: 10px;
+}
+
+@media screen and (max-width:767px){
+  .searchBox input {
+    max-width: 200px;
+  }
+}
+
+.searchBox button {
+  position: absolute;
+  top: -0.05rem;
+  right: 0;
+  cursor: pointer;
+  padding: .8rem .9rem .8rem .8rem;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 1rem;
+  transition: 0.5s;
+}
+
+.searchBox input:focus {
+  outline: 0;
+}
+
+.searchBox button:hover {
+  color: #4eadb8;
+  transform: scale(1.2);
+}
+
+/* 記事一覧 */
+.postWrap {
+  display: flex;
+  justify-content: space-between;
+  /* gap: 30px; */
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width:768px) {
+  .postWrap {
+    /* display: block; */
+    margin: 0 auto;
+  }
+}
+
+.postItem {
+  border: 1px solid #333;
+  border-radius: 10px;
+  width: 30%;
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+.postItem .title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.postItem .status {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width:768px){
+  .postItem {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width:420px){
+  .postWrap {
+    display: block;
+  }
+  .postItem {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+}
+
+.postItem_inner {
+  padding: 24.5px;
+}
+
+.pageNation {
+  max-width: 800px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.pc_only {
+  display: block;
+}
+@media screen and (max-width:768px){
+  .pc_only {
+    display: none;
+  }
+}
+
+/* ページネーション */
+.pageNation .pageNation_prev,
+.pageNation .pageNation_next {
+  font-weight: bold;
+}
+
+.pageNum {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.pageNum .num {
+  font-size: 16px;
+  width: 40px;
+  line-height: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  font-weight: bold;
+  border: 1px solid rgba(221, 221, 221, 1);
+}
+
+.pageNum .num.active {
+  background-color: #333;
+  color: #fff;
+}
+
+.pageNum .num a {
+  display: block;
+  text-align: center;
+}
