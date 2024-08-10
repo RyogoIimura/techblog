@@ -1,10 +1,8 @@
 'use client'
-import Image from "next/image";
-import PenLogo from '../../public/images/pen_logo.svg';
-import UserLogo from '../../public/images/user_logo.svg';
 import React, { useState } from "react";
 
 import { poppins } from "../utils/fonts";
+import { HeaderButton } from "./HeaderButton";
 
 type HeaderProps = {
   page: string
@@ -12,151 +10,31 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const { page } = props;
-  const buttonChoice = (name: string, hidden: boolean = false) => {
-    if( name === 'Create'){
-      return (
-        <button className={`
-          w-fit
-          h-fit
-          bg-[#383838]
-          border-[1px]
-          border-[#383838]
-          rounded-[57px]
-          pl-[36px]
-          pr-[18px]
-          py-[6px]
-          my-auto
-          relative
-
-          md:ml-[24px]
-        `}>
-          <Image
-            className={`
-              w-[14px]
-              h-auto
-              absolute
-              top-[50%]
-              left-[18px]
-              transform
-              translate-y-[-50%]
-            `}
-            src={PenLogo}
-            alt="PenLogo"
-          />
-          <p className={`
-            ${poppins.className}
-            text-white
-            text-[14px]
-
-            md:text-[14px]
-          `}>Create</p>
-        </button>
-      )
-    }
-    if( name === 'Sign In'){
-      return (
-        <button className={`
-          w-fit
-          h-fit
-          bg-[#d9d9d9]
-          border-[1px]
-          border-[#383838]
-          rounded-[57px]
-          px-[28px]
-          py-[6px]
-
-          md:my-auto
-          md:ml-[24px]
-          ${hidden ? 'hidden md:block' : ''}
-        `}>
-          <p className={`
-            ${poppins.className}
-            text-[#383838]
-            text-[14px]
-
-            md:text-[14px]
-          `}>Sign In</p>
-        </button>
-      )
-    }
-    if( name === 'Publish'){
-      return (
-        <button className={`
-          w-fit
-          h-fit
-          bg-[#18A0FB]
-          border-[1px]
-          border-[#18A0FB]
-          rounded-[57px]
-          px-[28px]
-          py-[6px]
-          my-auto
-
-          md:ml-[24px]
-        `}>
-          <p className={`
-            ${poppins.className}
-            text-[#000]
-            text-[14px]
-
-            md:text-[14px]
-          `}>Publish</p>
-        </button>
-      )
-    }
-    if( name === 'Logout'){
-      return (
-        <button className={`
-          w-fit
-          h-fit
-
-          md:my-auto
-          md:ml-[48px]
-          ${hidden ? 'hidden md:block' : ''}
-        `}>
-          <Image
-            className={`
-              w-[48px]
-              h-auto
-            `}
-            src={UserLogo}
-            alt="UserLogo"
-          />
-        </button>
-      )
-    }
-  }
   const headerButtonChange = () => {
     if( page === 'Write Blog'){
-      return [ buttonChoice('Publish'), buttonChoice('Sign In', true) ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish'), HeaderButton('Sign In', 'hidden md:block') ]
     } else if ( page === 'Profile'){
-      return [ buttonChoice('Create'), buttonChoice('Logout', true) ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Logout', 'hidden md:block') ]
     } else {
-      return [ buttonChoice('Create'), buttonChoice('Sign In', true) ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Sign In', 'hidden md:block') ]
     }
   }
   const navButtonChange = () => {
     if( page === 'Write Blog'){
-      return [ buttonChoice('Publish'), buttonChoice('Sign In') ]
+      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
     } else if ( page === 'Profile'){
-      return [ buttonChoice('Create'), buttonChoice('Logout') ]
+      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Logout', 'mx-[auto] mt-[40px]') ]
     } else {
-      return [ buttonChoice('Create'), buttonChoice('Sign In') ]
+      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
     }
   }
 
   const [nav, setNav] = useState<boolean>(false);
-  const navOpen = () => {
-    setNav(!nav);
-    if (nav) {
-      console.log('close')
-    } else {
-      console.log('open')
-    }
-  }
+  const navOpen = () => setNav(!nav);
 
   return (
     <>
+      {/* header */}
       <div className={`
         w-full
         fixed
@@ -201,44 +79,21 @@ const Header = (props: HeaderProps) => {
             md:pr-0
           `}
           >
-            <button className={`
-              w-fit
-              h-fit
-              bg-[#383838]
-              border-[1px]
-              border-[#383838]
-              rounded-[57px]
-              px-[28px]
-              py-[6px]
-              hidden
-
-              md:my-auto
-              md:block
-            `}>
-              <p className={`
-                ${poppins.className}
-                text-white
-                text-[14px]
-
-                md:text-[14px]
-                md:block
-              `}>Home</p>
-            </button>
             {headerButtonChange()}
           </div>
         </div>
       </div>
+
+      {/* nav menu */}
       <div
         className={`
           fixed
           z-105
           top-0
           right-0
-          h-[180px]
-          pl-[30px]
-          pr-[74px]
-          pt-[20px]
-          pb-[30px]
+          w-[100vw]
+          h-[100vh]
+          pt-[164px]
           bg-[#d9d9d9]
           flex
           flex-col
@@ -250,29 +105,10 @@ const Header = (props: HeaderProps) => {
           transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        <button className={`
-          w-fit
-          h-fit
-          bg-[#383838]
-          border-[1px]
-          border-[#383838]
-          rounded-[57px]
-          px-[28px]
-          py-[6px]
-
-          md:my-auto
-        `}>
-          <p className={`
-            ${poppins.className}
-            text-white
-            text-[14px]
-
-            md:text-[14px]
-            md:block
-          `}>Home</p>
-        </button>
         {navButtonChange()}
       </div>
+
+      {/* hamburger */}
       <button className={`
           fixed
           z-110
@@ -285,6 +121,7 @@ const Header = (props: HeaderProps) => {
 
           md:hidden
         `}
+        aria-label='hamburger'
         onClick={() => navOpen()}
       >
         <div className={`

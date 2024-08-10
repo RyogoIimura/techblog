@@ -5,7 +5,7 @@ import { poppins } from "../utils/fonts";
 import FormInput from "./FormInput";
 
 const SignUp: () => React.JSX.Element = () => {
-  const signUp = () => {
+  const handleSignUp = () => {
     console.log('signUp open');
   }
 
@@ -99,7 +99,7 @@ const SignUp: () => React.JSX.Element = () => {
               md:text-[12px]
               md:mt-[16px]
             `}
-            >Already  have an account ? <span className="text-[#3094d2] cursor-pointer" onClick={signUp}>Sign in</span></p>
+            >Already  have an account ? <span className="text-[#3094d2] cursor-pointer" onClick={handleSignUp}>Sign in</span></p>
           </div>
         </form>
       </div>
