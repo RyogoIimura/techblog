@@ -1,12 +1,12 @@
-import React from 'react'
+"use client"; // これをファイルの最上部に追加
+
+
+import React, { useEffect, useState } from 'react'
 import styles from "./home.module.css";
 import Image from 'next/image'
 import dummy from '/public/images/dummy.png'
 import searchIcon from "/public//images//search_icon.svg"
-
-type Props = {
-  number: number[]
-}
+import {Pagenation} from '../components/Pagenation'
 
 const Page = () => {
 
@@ -22,12 +22,9 @@ const Page = () => {
     { title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
   ];
 
-  const pageNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-
   return (
     <>
-      <main className={styles.main}>
+      <main className='p-4'>
         <div className={styles.searchBox}>
           <input type="text" placeholder="検索ワード" />
           <button type="submit">
@@ -36,7 +33,7 @@ const Page = () => {
           </button>
         </div>
 
-        <div className={styles.container}>
+        <div className="mx-auto mt-0 mb-0">
           <ul className={styles.postWrap}>
 
 
@@ -61,24 +58,8 @@ const Page = () => {
               </li>
             ))}
           </ul>
-          <div className={styles.pageNation}>
 
-            <a href="" className={styles.pageNation_prev}>
-              <p>← Prev Page</p>
-            </a>
-            <div className={styles.pageNum}>
-              <div className={styles.pageNation}>
-                {pageNum.map((num, index) => (
-                  <div key={index} className={styles.num}>
-                    <a href={`/?page=${num}`}>{num}</a>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <a href="" className={styles.pageNation_next}>
-              <p>Next Page →</p>
-            </a>
-          </div>
+          <Pagenation/>
         </div>
 
         <p className="mb-20">テスト</p>
