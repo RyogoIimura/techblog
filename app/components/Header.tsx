@@ -293,6 +293,7 @@ const Header = (props: HeaderProps) => {
 
           md:hidden
         `}
+        aria-label='hamburger'
         onClick={() => navOpen()}
       >
         <div className={`
