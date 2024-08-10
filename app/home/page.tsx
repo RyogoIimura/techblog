@@ -7,6 +7,7 @@ import Image from 'next/image'
 import dummy from '/public/images/dummy.png'
 import searchIcon from "/public//images//search_icon.svg"
 import {Pagenation} from '../components/Pagenation'
+import { Container } from '../components/Container/Container';
 
 const Page = () => {
 
@@ -24,6 +25,7 @@ const Page = () => {
 
   return (
     <>
+    <Container>
       <main className='p-4'>
         <div className={styles.searchBox}>
           <input type="text" placeholder="検索ワード" />
@@ -65,6 +67,9 @@ const Page = () => {
         <p className="mb-20">テスト</p>
 
       </main>
+
+    </Container>
+
 
     </>
   )
