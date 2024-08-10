@@ -1,22 +1,3 @@
-/* .main {
-  padding: 20px;
-} */
-
-/* @media screen and (max-width:767px){
-  .main {
-    padding: 16px;
-  }
-} */
-
-.txtBlue{
-  color: #18A0FB;
-}
-
-.container {
-  max-width: 980px;
-  margin: 0 auto;
-}
-
 /* 検索バー */
 .searchBox {
   display: block;
