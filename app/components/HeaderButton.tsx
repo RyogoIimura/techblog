@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import Image from "next/image";
 import PenLogo from '../../public/images/pen_logo.svg';
 import UserLogo from '../../public/images/user_logo.svg';

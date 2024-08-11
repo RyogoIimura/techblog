@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import { poppins } from "../utils/fonts";
 import FormInput from "./FormInput";
 
-const SignUp: () => React.JSX.Element = () => {
+const SignUp = ():React.JSX.Element => {
   const handleSignUp = () => {
     console.log('signUp open');
   }
 
   return (
     <div className="absolute top-0 left-0 z-115">
-      <div className="w-screen h-screen relative">
+      {/* <div className="w-screen h-screen relative">
         <div className="w-screen h-screen bg-black opacity-50 hidden md:block"></div>
         <form
           className="
@@ -102,7 +102,7 @@ const SignUp: () => React.JSX.Element = () => {
             >Already  have an account ? <span className="text-[#3094d2] cursor-pointer" onClick={handleSignUp}>Sign in</span></p>
           </div>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };
