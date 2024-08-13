@@ -7,7 +7,8 @@ import { CommonContext } from "../contexts/CommonContext";
 
 const SignUp = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signUpMdFlag, signInOpen, signUpOpen } = context;
+  const { signInOpen, signUpMdFlag, signUpOpen } = context;
+
   const handleSignUp = () => {
     console.log('signUp open');
   }
@@ -118,6 +119,49 @@ const SignUp = ():React.JSX.Element => {
                   </span>
                 </p>
               </div>
+
+              <button className={`
+                  fixed
+                  top-0
+                  right-0
+                  w-[74px]
+                  h-[74px]
+                  flex
+                  justify-center
+
+                  md:hidden
+                `}
+                aria-label='nav close'
+                onClick={() => signUpOpen()}
+              >
+                <div className={`
+                  w-[36px]
+                  h-[24px]
+                  my-auto
+                  relative
+                `}>
+                  <div className={`
+                      w-[100%]
+                      h-[3px]
+                      bg-black
+                      absolute
+                      left-0
+                      top-[calc(50%-1.5px)]
+                      rotate-[45deg]
+                    `}
+                  ></div>
+                  <div className={`
+                      w-[100%]
+                      h-[3px]
+                      bg-black
+                      absolute
+                      left-0
+                      bottom-[calc(50%-1.5px)]
+                      rotate-[-45deg]
+                    `}
+                  ></div>
+                </div>
+              </button>
             </form>
           </div>
         </div>

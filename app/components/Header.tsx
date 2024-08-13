@@ -29,8 +29,8 @@ const Header = (props: HeaderProps) => {
     }
   }
 
-  const [nav, setNav] = useState<boolean>(false);
-  const navOpen = () => setNav(!nav);
+  const [navFlag, setNavFlag] = useState<boolean>(false);
+  const navOpen = () => setNavFlag(!navFlag);
 
   return (
     <>
@@ -98,7 +98,7 @@ const Header = (props: HeaderProps) => {
           flex
           flex-col
           transform
-          ${nav ? 'translate-x-[100%] opacity-[0]' : 'translate-x-0 opacity-[1]'}
+          ${navFlag ? 'translate-x-0 opacity-[1]' : 'translate-x-[100%] opacity-[0]'}
           md:hidden
         `}
         style={{
@@ -136,7 +136,7 @@ const Header = (props: HeaderProps) => {
               bg-black
               absolute
               left-0
-              ${nav ? 'top-[0]' : 'top-[calc(50%-1.5px)] rotate-[45deg]'}
+              ${navFlag ? 'top-[calc(50%-1.5px)] rotate-[45deg]' : 'top-[0]'}
             `}
             style={{
               transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -149,7 +149,7 @@ const Header = (props: HeaderProps) => {
             absolute
             left-0
             top-[calc(50%-1.5px)]
-            ${nav ? 'opacity-[1]' : 'opacity-[0]'}
+            ${navFlag ? 'opacity-[0]' : 'opacity-[1]'}
             `}
             style={{
               transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -161,7 +161,7 @@ const Header = (props: HeaderProps) => {
             bg-black
             absolute
             left-0
-            ${nav ? 'bottom-[0]' : 'bottom-[calc(50%-1.5px)] rotate-[-45deg]'}
+            ${navFlag ? 'bottom-[calc(50%-1.5px)] rotate-[-45deg]' : 'bottom-[0]'}
             `}
             style={{
               transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'

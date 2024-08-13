@@ -8,6 +8,7 @@ import { CommonContext } from "../contexts/CommonContext";
 const SignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
   const { signInMdFlag, signInOpen, signUpOpen } = context;
+
   const handleSignIn = () => {
     console.log('signIn open');
   }
@@ -29,6 +30,7 @@ const SignIn = ():React.JSX.Element => {
               px-[calc(100vw*(32/750))]
               pt-[calc(100vw*(258/750))]
               pb-[calc(100vw*(430/750))]
+              relative
 
               md:w-fit
               md:rounded-[14px]
@@ -115,6 +117,49 @@ const SignIn = ():React.JSX.Element => {
                   </span>
                 </p>
               </div>
+
+              <button className={`
+                fixed
+                top-0
+                right-0
+                w-[74px]
+                h-[74px]
+                flex
+                justify-center
+
+                md:hidden
+              `}
+              aria-label='nav close'
+              onClick={() => signInOpen()}
+            >
+              <div className={`
+                w-[36px]
+                h-[24px]
+                my-auto
+                relative
+              `}>
+                <div className={`
+                    w-[100%]
+                    h-[3px]
+                    bg-black
+                    absolute
+                    left-0
+                    top-[calc(50%-1.5px)]
+                    rotate-[45deg]
+                  `}
+                ></div>
+                <div className={`
+                    w-[100%]
+                    h-[3px]
+                    bg-black
+                    absolute
+                    left-0
+                    bottom-[calc(50%-1.5px)]
+                    rotate-[-45deg]
+                  `}
+                ></div>
+              </div>
+              </button>
             </form>
           </div>
         </div>
