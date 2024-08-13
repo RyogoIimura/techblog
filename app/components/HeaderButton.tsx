@@ -1,10 +1,15 @@
+import React, { useContext } from "react";
+
 import Image from "next/image";
 import PenLogo from '../../public/images/pen_logo.svg';
 import UserLogo from '../../public/images/user_logo.svg';
 import { poppins } from "../utils/fonts";
+import { CommonContext } from "../contexts/CommonContext";
 
 
 export const HeaderButton = (name: string, button?: string, p?: string) => {
+  const context = useContext(CommonContext);
+  const { signInOpen } = context;
 
   if( name === 'Create'){
     return (
@@ -67,6 +72,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           ${button}
         `}
         key='Sign In'
+        onClick={() => signInOpen()}
       >
         <p className={`
           ${poppins.className}
