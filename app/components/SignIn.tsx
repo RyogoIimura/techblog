@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import FormInput from "./FormInput";
 import { poppins } from "../utils/fonts";
@@ -7,10 +7,21 @@ import { CommonContext } from "../contexts/CommonContext";
 
 const SignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signInMdFlag, signInOpen, signUpOpen } = context;
+  const { signInFlag, setSignInFlag, setUser, signInMdFlag, signInOpen, signUpOpen } = context;
 
-  const handleSignIn = () => {
-    console.log('signIn open');
+  // form の打ち込んだテキストを参照
+  const [ inputEmail, setInputEmail ] = useState<string>('');
+  const [ inputPass, setInputPass ] = useState<string>('');
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setUser({
+      email: inputEmail,
+      password: inputPass,
+    })
+    setSignInFlag(!signInFlag)
+    // console.log(inputEmail, inputPass)
+    signInOpen()
   }
 
   return (
@@ -57,10 +68,10 @@ const SignIn = ():React.JSX.Element => {
                 `}>Sign In</p>
 
               <div className={`w-full mt-[calc(100vw*(64/750))] md:w-[470px] md:mt-[36px]`}>
-                <FormInput role='email' />
+                <FormInput role='email' input={inputEmail} setInput={setInputEmail} />
               </div>
               <div className={`w-full mt-[calc(100vw*(34/750))] md:w-[470px] md:mt-[14px]`}>
-                <FormInput role='password' />
+                <FormInput role='password' input={inputPass} setInput={setInputPass} />
               </div>
 
               <div className="
@@ -83,6 +94,7 @@ const SignIn = ():React.JSX.Element => {
                     md:py-[14px]
                   `}
                   type="submit"
+                  onClick={handleSignIn}
                 >
                   <p className={`
                     ${poppins.className}

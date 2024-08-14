@@ -1,8 +1,9 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { poppins } from "../utils/fonts";
 import { HeaderButton } from "./HeaderButton";
+import { CommonContext } from "../contexts/CommonContext";
 
 type HeaderProps = {
   page: string
@@ -10,22 +11,14 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const { page } = props;
+  const context = useContext(CommonContext);
+  const { signInFlag } = context;
+
   const headerButtonChange = () => {
     if( page === 'Write Blog'){
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish'), HeaderButton('Sign In', 'hidden md:block') ]
-    } else if ( page === 'Profile'){
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Logout', 'hidden md:block') ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish') ]
     } else {
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Sign In', 'hidden md:block') ]
-    }
-  }
-  const navButtonChange = () => {
-    if( page === 'Write Blog'){
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
-    } else if ( page === 'Profile'){
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Logout', 'mx-[auto] mt-[40px]') ]
-    } else {
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create') ]
     }
   }
 
@@ -80,6 +73,7 @@ const Header = (props: HeaderProps) => {
           `}
           >
             {headerButtonChange()}
+            {signInFlag? HeaderButton('Logout', 'hidden md:block') : HeaderButton('Sign In', 'hidden md:block')}
           </div>
         </div>
       </div>
@@ -105,7 +99,8 @@ const Header = (props: HeaderProps) => {
           transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {navButtonChange()}
+        {HeaderButton('Home', 'mx-auto')}
+        {signInFlag? HeaderButton('Logout', 'mx-[auto] mt-[40px]') : HeaderButton('Sign In', 'mx-[auto] mt-[40px]')}
       </div>
 
       {/* hamburger */}

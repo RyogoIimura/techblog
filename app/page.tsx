@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       {/* Home Write Blog Profile */}
-      <CommonUi name='Home' />
+      <CommonUi name='Write Blog' />
       <div>Hello World!</div>
     </>
   );

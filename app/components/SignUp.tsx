@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 import FormInput from "./FormInput";
 import { poppins } from "../utils/fonts";
@@ -7,10 +7,23 @@ import { CommonContext } from "../contexts/CommonContext";
 
 const SignUp = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signInOpen, signUpMdFlag, signUpOpen } = context;
+  const { signInFlag, setSignInFlag, setUser, signInOpen, signUpMdFlag, signUpOpen } = context;
 
-  const handleSignUp = () => {
-    console.log('signUp open');
+  // form の打ち込んだテキストを参照
+  const [ inputName, setInputName ] = useState<string>('');
+  const [ inputEmail, setInputEmail ] = useState<string>('');
+  const [ inputPass, setInputPass ] = useState<string>('');
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setUser({
+      username: inputName,
+      email: inputEmail,
+      password: inputPass,
+    })
+    setSignInFlag(!signInFlag)
+    // console.log(inputName, inputEmail, inputPass)
+    signUpOpen()
   }
 
   return (
@@ -56,13 +69,13 @@ const SignUp = ():React.JSX.Element => {
                 `}>Sign Up</p>
 
               <div className={`w-full mt-[calc(100vw*(64/750))] md:w-[470px] md:mt-[36px]`}>
-                <FormInput role='name' />
+                <FormInput role='name' input={inputName} setInput={setInputName} />
               </div>
               <div className={`w-full mt-[calc(100vw*(34/750))] md:w-[470px] md:mt-[14px]`}>
-                <FormInput role='email' />
+                <FormInput role='email' input={inputEmail} setInput={setInputEmail} />
               </div>
               <div className={`w-full mt-[calc(100vw*(34/750))] md:w-[470px] md:mt-[14px]`}>
-                <FormInput role='password' />
+                <FormInput role='password' input={inputPass} setInput={setInputPass} />
               </div>
 
               <div className="
@@ -85,6 +98,7 @@ const SignUp = ():React.JSX.Element => {
                     md:py-[14px]
                   `}
                   type="submit"
+                  onClick={handleSignUp}
                 >
                   <p className={`
                     ${poppins.className}
