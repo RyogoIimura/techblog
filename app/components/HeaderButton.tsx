@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Link from 'next/link';
 
 import Image from "next/image";
 import PenLogo from '../../public/images/pen_logo.svg';
@@ -13,7 +14,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
 
   if( name === 'Create'){
     return (
-      <button className={`
+      <Link className={`
           w-fit
           h-fit
           bg-[#383838]
@@ -30,6 +31,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           ${button}
         `}
         key='Create'
+        href="./create"
       >
         <Image
           className={`
@@ -52,7 +54,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           md:text-[14px]
           ${p}
         `}>Create</p>
-      </button>
+      </Link>
     )
   }
   if( name === 'Sign In'){
@@ -139,7 +141,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
   }
   if( name === 'Home'){
     return (
-      <button className={`
+      <Link className={`
           w-fit
           h-fit
           bg-[#383838]
@@ -153,6 +155,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           ${button}
         `}
         key='Home'
+        href="./home"
       >
         <p className={`
           ${poppins.className}
@@ -162,7 +165,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           md:block
           ${p}
         `}>Home</p>
-      </button>
+      </Link>
     )
   }
 };
