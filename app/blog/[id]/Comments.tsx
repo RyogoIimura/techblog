@@ -83,7 +83,7 @@ const Comments: FC<Record<string, never>> = React.memo(() => {
             user_id={comment.user_id}
             image_path={comment.image_path}
             content={comment.content}
-            labelTime={getLabelTime(comment.created_at)}
+            dateTime={getLabelTime(comment.created_at)}
           />
         ))}
       </div>
