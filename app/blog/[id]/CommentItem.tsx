@@ -20,13 +20,12 @@ type PostCommentsType = Pick<
 
 type PostCommentsTimeType = {
   dateTime: string;
-  labelTime: string;
 };
 
 type Props = PostCommentsType & PostCommentsTimeType;
 
 const CommentItem: FC<Props> = React.memo((props) => {
-  const { user_id, content, image_path, dateTime, labelTime } = props;
+  const { user_id, content, image_path, dateTime } = props;
   return (
     <article
       className="flex gap-11 p-5"
@@ -49,9 +48,7 @@ const CommentItem: FC<Props> = React.memo((props) => {
       </div>
       <div className="flex-1">
         <p>{content}</p>
-        <time dateTime={dateTime} style={{ color: "rgba(24, 160, 251, 0.5)" }}>
-          {labelTime}
-        </time>
+        <span style={{ color: "rgba(24, 160, 251, 0.5)" }}>{dateTime}</span>
       </div>
     </article>
   );

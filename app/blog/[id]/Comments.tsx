@@ -3,6 +3,7 @@ import React, { ChangeEvent, FC, useState } from "react";
 
 import "./Comments.modules.css";
 import CommentItem from "./CommentItem";
+import { getLabelTime } from "@/app/utils/dateFormat";
 
 type CommentsType = {
   id: string;
@@ -18,53 +19,6 @@ type PostCommentsType = Pick<
   CommentsType,
   "id" | "user_id" | "content" | "image_path" | "created_at"
 >;
-
-const getDateTime = (date: Date): string => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-    timeZone: "Asia/Tokyo",
-  };
-
-  const formattedDate = new Intl.DateTimeFormat("ja-JP", options).format(date);
-
-  // YYYY-MM-DD HH:MM:SS 形式に変換
-  return formattedDate.replace(/\//g, "-").replace(", ", " ");
-};
-
-const getLabelTime = (date: Date): string => {
-  const seconds: number = Math.floor(
-    (new Date().getTime() - date.getTime()) / 1000
-  );
-
-  let interval: number = seconds / 31536000;
-
-  if (interval > 1) {
-    return Math.floor(interval) + " years ago";
-  }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    return Math.floor(interval) + " months ago";
-  }
-  interval = seconds / 86400;
-  if (interval > 1) {
-    return Math.floor(interval) + " days ago";
-  }
-  interval = seconds / 3600;
-  if (interval > 1) {
-    return Math.floor(interval) + " hours ago";
-  }
-  interval = seconds / 60;
-  if (interval > 1) {
-    return Math.floor(interval) + " minutes ago";
-  }
-  return "a min ago";
-};
 
 // ダミーコメント
 const sampleComments: Array<PostCommentsType> = [
@@ -129,8 +83,7 @@ const Comments: FC<Record<string, never>> = React.memo(() => {
             user_id={comment.user_id}
             image_path={comment.image_path}
             content={comment.content}
-            dateTime={getDateTime(comment.created_at)}
-            labelTime={getLabelTime(comment.created_at)}
+            dateTime={getLabelTime(comment.created_at)}
           />
         ))}
       </div>
