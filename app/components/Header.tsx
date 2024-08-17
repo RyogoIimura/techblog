@@ -56,7 +56,7 @@ const Header = (props: HeaderProps) => {
             translate-y-[-50%]
             left-[calc(100vw*(68/750))]
 
-            md:left-[64px]
+            md:left-[50px]
           `}>LOGO</p>
           <div className={`
             absolute
@@ -68,7 +68,7 @@ const Header = (props: HeaderProps) => {
             pr-[74px]
 
             md:x-[450px]
-            md:right-[64px]
+            md:right-[70px]
             md:pr-0
           `}
           >
