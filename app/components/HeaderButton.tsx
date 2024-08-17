@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Link from 'next/link';
 
 import Image from "next/image";
@@ -10,7 +10,15 @@ import { CommonContext } from "../contexts/CommonContext";
 
 export const HeaderButton = (name: string, button?: string, p?: string) => {
   const context = useContext(CommonContext);
-  const { signInOpen } = context;
+  const { signInFlag, setSignInFlag, signInOpen } = context;
+
+  const [logoutMdFlag, setLogoutMdFlag] = useState(false);
+  const logoutOpen = () => setLogoutMdFlag(!logoutMdFlag);
+  const handleLogout = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setSignInFlag(!signInFlag)
+  }
 
   if( name === 'Create'){
     return (
@@ -118,25 +126,77 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
   }
   if( name === 'Logout'){
     return (
-      <button className={`
+      <div className={`
           w-fit
           h-fit
+          relative
 
           md:my-auto
           md:ml-[48px]
           ${button}
         `}
-        key='Logout'
       >
-        <Image
-          className={`
-            w-[48px]
-            h-auto
+        <button className={`
+            w-fit
+            h-fit
           `}
-          src={UserLogo}
-          alt="UserLogo"
-        />
-      </button>
+          key='Logout Open'
+          onClick={() => logoutOpen()}
+        >
+          <Image
+            className={`
+              w-[48px]
+              h-auto
+            `}
+            src={UserLogo}
+            alt="UserLogo"
+          />
+        </button>
+        {logoutMdFlag ? (
+          <div className={`
+            w-fit
+            h-fit
+            px-[18px]
+            py-[16px]
+            bg-[#B3B3B3]
+            rounded-[14px]
+            absolute
+            bottom-0
+            left-[50%]
+            transform
+            translate-x-[-50%]
+            translate-y-[calc(100%+6px)]
+          `}>
+            <p className={`
+              font-[26px]
+              font-semibold
+              whitespace-nowrap
+              text-center
+              ${poppins.className}
+            `}>User name</p>
+            <button className={`
+                w-fit
+                y-fit
+                px-[30px]
+                py-[4px]
+                mt-[10px]
+                bg-[rgba(255,49,49,.5)]
+                rounded-[32px]
+              `}
+              key='Logout'
+              onClick={handleLogout}
+            >
+              <p className={`
+                font-[26px]
+                font-semibold
+                whitespace-nowrap
+                text-center
+                ${poppins.className}
+              `}>Logout</p>
+            </button>
+          </div>
+        ) : (<></>)}
+      </div>
     )
   }
   if( name === 'Home'){
