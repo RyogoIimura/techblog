@@ -1,11 +1,15 @@
+import React from "react";
+
 import { poppins } from "../utils/fonts";
 
 type FormInputProps = {
-  role: string;
+  role: string
+  input: string
+  setInput: React.Dispatch<React.SetStateAction<string>>
 };
 
 const FormInput = (props: FormInputProps) => {
-  const { role } = props;
+  const { role, input, setInput } = props;
 
   return (
     <>
@@ -38,6 +42,8 @@ const FormInput = (props: FormInputProps) => {
         type="text"
         name={`${role}`}
         placeholder={`Enter your ${role}`}
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
     </>
   );

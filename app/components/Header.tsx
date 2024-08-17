@@ -1,8 +1,9 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { poppins } from "../utils/fonts";
 import { HeaderButton } from "./HeaderButton";
+import { CommonContext } from "../contexts/CommonContext";
 
 type HeaderProps = {
   page: string
@@ -10,27 +11,19 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const { page } = props;
+  const context = useContext(CommonContext);
+  const { signInFlag } = context;
+
   const headerButtonChange = () => {
     if( page === 'Write Blog'){
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish'), HeaderButton('Sign In', 'hidden md:block') ]
-    } else if ( page === 'Profile'){
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Logout', 'hidden md:block') ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish') ]
     } else {
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create'), HeaderButton('Sign In', 'hidden md:block') ]
-    }
-  }
-  const navButtonChange = () => {
-    if( page === 'Write Blog'){
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
-    } else if ( page === 'Profile'){
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Logout', 'mx-[auto] mt-[40px]') ]
-    } else {
-      return [ HeaderButton('Home', 'mx-auto'), HeaderButton('Sign In', 'mx-[auto] mt-[40px]') ]
+      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create') ]
     }
   }
 
-  const [nav, setNav] = useState<boolean>(false);
-  const navOpen = () => setNav(!nav);
+  const [navFlag, setNavFlag] = useState<boolean>(false);
+  const navOpen = () => setNavFlag(!navFlag);
 
   return (
     <>
@@ -75,11 +68,12 @@ const Header = (props: HeaderProps) => {
             pr-[74px]
 
             md:x-[450px]
-            md:right-[44px]
+            md:right-[70px]
             md:pr-0
           `}
           >
             {headerButtonChange()}
+            {signInFlag? HeaderButton('Logout', 'hidden md:block') : HeaderButton('Sign In', 'hidden md:block')}
           </div>
         </div>
       </div>
@@ -98,14 +92,15 @@ const Header = (props: HeaderProps) => {
           flex
           flex-col
           transform
-          ${nav ? 'translate-x-[100%] opacity-[0]' : 'translate-x-0 opacity-[1]'}
+          ${navFlag ? 'translate-x-0 opacity-[1]' : 'translate-x-[100%] opacity-[0]'}
           md:hidden
         `}
         style={{
           transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
-        {navButtonChange()}
+        {HeaderButton('Home', 'mx-auto')}
+        {signInFlag? HeaderButton('Logout', 'mx-[auto] mt-[40px]') : HeaderButton('Sign In', 'mx-[auto] mt-[40px]')}
       </div>
 
       {/* hamburger */}
@@ -136,7 +131,7 @@ const Header = (props: HeaderProps) => {
               bg-black
               absolute
               left-0
-              ${nav ? 'top-[0]' : 'top-[calc(50%-1.5px)] rotate-[45deg]'}
+              ${navFlag ? 'top-[calc(50%-1.5px)] rotate-[45deg]' : 'top-[0]'}
             `}
             style={{
               transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -149,7 +144,7 @@ const Header = (props: HeaderProps) => {
             absolute
             left-0
             top-[calc(50%-1.5px)]
-            ${nav ? 'opacity-[1]' : 'opacity-[0]'}
+            ${navFlag ? 'opacity-[0]' : 'opacity-[1]'}
             `}
             style={{
               transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1)'
@@ -161,7 +156,7 @@ const Header = (props: HeaderProps) => {
             bg-black
             absolute
             left-0
-            ${nav ? 'bottom-[0]' : 'bottom-[calc(50%-1.5px)] rotate-[-45deg]'}
+            ${navFlag ? 'bottom-[calc(50%-1.5px)] rotate-[-45deg]' : 'bottom-[0]'}
             `}
             style={{
               transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
