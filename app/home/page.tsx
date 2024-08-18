@@ -86,10 +86,10 @@ const Page = () => {
             </ul>
             {/* <Pagenation /> */}
           </div>
-          
+
           <div>
             {Array.from({ length: totalPages }, (_, index) => (
-              <button key={index + 1} onClick={() => handleClick(index + 1)}>
+              <button className="px-2" key={index + 1} onClick={() => handleClick(index + 1)}>
                 {index + 1}
               </button>
             ))}
