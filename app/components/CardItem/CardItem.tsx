@@ -19,7 +19,7 @@ export const CardItem: FC<Props> = ((props) => {
 
   return (
     <>
-      <li key={id} className={styles.postItem}>
+      <li  className={styles.postItem}>
         <a href="">
           <Image src={imageUrl} alt={alt} width="400" height="100" />
           <div className={styles.postItem_inner}>
