@@ -1,5 +1,8 @@
+"use client";
+
+import ImageUploadeSection from "@/app/create/components/ImageUploadeSection";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useState } from "react";
 
 // React-Quillを動的にインポートし、SSRを無効にする
 const QuillEditor = dynamic(() => import("./components/QuillEditor"), {
@@ -33,14 +36,7 @@ function CreatePage() {
                 />
               </div>
               {/* アップロードエリア */}
-              <div className='mb-5'>
-                <div className='w-full h-[clamp(200px,30vw,400px)] border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center'>
-                  <div className='my-8 text-7xl text-gray-300'>↑</div>
-                  <button className='bg-blue-400 w-[clamp(100px,30vw,200px)] h-[clamp(40px,10vw,50px)] text-[clamp(12px,3vw,20px)] mb-5 rounded-full flex items-center justify-center'>
-                    Upload Image
-                  </button>
-                </div>
-              </div>
+              <ImageUploadeSection />
               {/* 本文エリア */}
               <div className='lg:mb-4'>
                 <QuillEditor />
