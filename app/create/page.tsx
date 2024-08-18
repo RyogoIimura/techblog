@@ -33,8 +33,8 @@ function CreatePage() {
     const { error } = await supabase.from("posts").insert([
       {
         id: uuidv4(),
-        user_id: 1, // ユーザーIDは仮で1を設定（後で実際のユーザーIDを取得するように変更）
-        category_id: 1, // カテゴリーIDについても別途実装
+        user_id: 1, // TODO:ユーザーIDは仮で1を設定（後で実際のユーザーIDを取得するように変更）
+        category_id: 1, // TODO:カテゴリーIDについても別途実装
         title: title,
         content: content,
         image_path: imageUrl,
@@ -89,6 +89,7 @@ function CreatePage() {
                 <QuillEditor content={content} setContent={setContent} />
               </div>
               <div className='flex justify-end'>
+                {/* TODO:ボタンは別途共通コンポーネントを採用 */}
                 <button
                   onClick={handleSavePost}
                   className='bg-blue-500 text-white px-4 py-2 rounded'
