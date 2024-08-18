@@ -52,6 +52,7 @@ const Page = () => {
 
   const handleClick = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    console.log(`${pageNumber}`);
   };
 
 
@@ -89,7 +90,13 @@ const Page = () => {
 
           <div className='flex justify-between items-center max-w-xs		mx-auto'>
             {Array.from({ length: totalPages }, (_, index) => (
-              <button  className="w-14 h-14 text-center flex items-center justify-center bg-white rounded-full border-2  border-black" key={index + 1} onClick={() => handleClick(index + 1)}>
+              <button
+                key={index + 1}
+                className={`w-14 h-14 text-center flex items-center justify-center rounded-full border-2 border-black ${
+                  currentPage === index + 1 ? 'bg-black text-white' : 'bg-white text-black'
+                }`}
+                onClick={() => handleClick(index + 1)}
+              >
                 {index + 1}
               </button>
             ))}
