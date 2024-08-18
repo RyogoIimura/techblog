@@ -1,11 +1,18 @@
 "use client";
 
 import useImageUploder from "@/app/hooks/useImageUploder";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
-export default function ImageUploadeSection() {
+type ImageUploadeSectionProps = {
+  onImageUpload: (url: string) => void;
+};
+
+export default function ImageUploadeSection({
+  onImageUpload,
+}: ImageUploadeSectionProps) {
   // 画像アップロードのカスタムフックを使用
-  const { uploading, error, handleFileChange } = useImageUploder();
+  const { uploading, error, handleFileChange, uploadedImageUrl } =
+    useImageUploder();
 
   // ボタンクリック時にファイル選択ダイアログを開くためにinput要素を参照
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -13,6 +20,13 @@ export default function ImageUploadeSection() {
   const handleButtonClick = () => {
     fileInputRef.current?.click();
   };
+
+  // 画像URLが変更されたときに親コンポーネントに通知
+  useEffect(() => {
+    if (uploadedImageUrl) {
+      onImageUpload(uploadedImageUrl);
+    }
+  }, [uploadedImageUrl, onImageUpload]);
 
   console.log(uploading);
 

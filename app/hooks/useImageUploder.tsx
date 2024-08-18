@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 function useImageUploder() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [uploadedImageUrl, setuploadedImageUrl] = useState<string | null>(null);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -27,6 +28,15 @@ function useImageUploder() {
         .upload(`img/${fileName}`, file);
       if (uploadError) throw uploadError;
       console.log("Uploaded successful:", fileName);
+      // アップロードした画像のURLを取得
+      const {
+        data: { publicUrl },
+      } = await supabase.storage
+        .from("public-image-bucket")
+        .getPublicUrl(`img/${fileName}`);
+
+      setuploadedImageUrl(publicUrl);
+      console.log("Public URL:", publicUrl);
     } catch (error) {
       if (error instanceof Error) {
         setError(`Upload failed: ${error.message}`);
@@ -36,7 +46,7 @@ function useImageUploder() {
     }
   };
 
-  return { uploading, error, handleFileChange, handleUpload };
+  return { uploading, error, uploadedImageUrl, handleFileChange, handleUpload };
 }
 
 export default useImageUploder;
