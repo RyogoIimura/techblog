@@ -27,8 +27,6 @@ export const Pagenation: FC<Props> = ({totalPage,handleClick,currentPage})=> {
       }
     };
 
-
-
     updatePages();
     window.addEventListener('resize', updatePages);
     return () => window.removeEventListener('resize', updatePages);
@@ -39,6 +37,9 @@ export const Pagenation: FC<Props> = ({totalPage,handleClick,currentPage})=> {
   return (
     <div className='flex justify-between items-center mx-2'>
       {/* <a onClick={() => handleClick(currentPage - 1)} disabled={currentPage === 1}>Prev</a> */}
+      <ul>
+        <li>テスト</li>
+      </ul>
 
       {visiblePages.map((num, index) => (
         <button key={index} className=''>

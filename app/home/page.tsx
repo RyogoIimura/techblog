@@ -87,9 +87,9 @@ const Page = () => {
             {/* <Pagenation /> */}
           </div>
 
-          <div>
+          <div className='flex justify-between items-center max-w-xs		mx-auto'>
             {Array.from({ length: totalPages }, (_, index) => (
-              <button className="px-2" key={index + 1} onClick={() => handleClick(index + 1)}>
+              <button  className="w-14 h-14 text-center flex items-center justify-center bg-white rounded-full border-2  border-black" key={index + 1} onClick={() => handleClick(index + 1)}>
                 {index + 1}
               </button>
             ))}
