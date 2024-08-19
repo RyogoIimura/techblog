@@ -17,8 +17,12 @@ const Size = Quill.import("formats/size");
 Size.whitelist = ["small", "normal", "large", "huge"];
 Quill.register(Size, true);
 
-function QuillEditor() {
-  const [content, setContent] = useState("");
+type QuillEditorProps = {
+  content: string;
+  setContent: (content: string) => void;
+};
+
+function QuillEditor({ content, setContent }: QuillEditorProps) {
   const quillRef = useRef<ReactQuill>(null);
 
   const formats = ["bold", "italic", "underline", "strike"];
