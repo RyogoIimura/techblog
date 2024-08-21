@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/app/components/Header";
 import ImageUploadeSection from "@/app/create/components/ImageUploadeSection";
 import { supabase } from "@/app/utils/supabase";
 import dynamic from "next/dynamic";
@@ -54,50 +55,39 @@ function CreatePage() {
   };
 
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className="min-h-screen flex flex-col">
       {/* ヘッダー*/}
-      <header className='bg-gray-300 h-20 sm:h-32 md:h-40 w-full'>
-        ナビゲーションバー
-      </header>
+      <Header page="Write Blog" onClick={handleSavePost} />
       {/* コンテンツエリア */}
-      <div className='flex-grow container mx-auto'>
-        <main className='px-4'>
-          <div className='flex-grow justify-center items-center h-40'>
-            <h1 className='text-gray-300 leading-normal text-center text-4xl sm:text-5xl md:text-6xl pt-4 font-bold'>
+      <div className="flex-grow container mx-auto">
+        <main className="px-4">
+          <div className="flex-grow justify-center items-center h-40 mt-[74px] md:mt-[90px]">
+            <h1 className="text-gray-300 leading-normal text-center text-4xl sm:text-5xl md:text-6xl pt-4 font-bold">
               Create Blog
             </h1>
           </div>
-          <div className='flex flex-col lg:flex-row w-full'>
+          <div className="flex flex-col lg:flex-row w-full">
             {/* メインコンテンツ */}
-            <section className='flex-grow lg:ml-16 mr-0 lg:mr-4 order-1 lg:order-2 w-full'>
+            <section className="flex-grow lg:ml-16 mr-0 lg:mr-4 order-1 lg:order-2 w-full">
+              {error && <p className="text-red-500 mt-2">{error}</p>}
               {/* タイトル */}
-              <div className='my-10'>
+              <div className="my-10">
                 <input
-                  type='text'
+                  type="text"
                   value={title}
-                  placeholder='Title'
+                  placeholder="Title"
                   onChange={(e) => setTitle(e.target.value)}
-                  className='w-full h-12 sm:h-16 text-[clamp(36px,4.5vw,64px)] placeholder:font-bold text-gray-500 focus:outline-none'
+                  className="w-full h-12 sm:h-16 text-[clamp(36px,4.5vw,64px)] placeholder:font-bold text-gray-500 focus:outline-none"
                 />
               </div>
               {/* アップロードエリア */}
               {/* URLを設定 */}
               <ImageUploadeSection onImageUpload={handleImageUpload} />
               {/* 本文エリア */}
-              <div className='lg:mb-4'>
+              <div className="lg:mb-4">
                 {/* 本文を設定 */}
                 <QuillEditor content={content} setContent={setContent} />
               </div>
-              <div className='flex justify-end'>
-                {/* TODO:ボタンは別途共通コンポーネントを採用 */}
-                <button
-                  onClick={handleSavePost}
-                  className='bg-blue-500 text-white px-4 py-2 rounded'
-                >
-                  Save Post
-                </button>
-              </div>
-              {error && <p className='text-red-500 mt-2'>{error}</p>}
             </section>
           </div>
         </main>
