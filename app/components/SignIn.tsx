@@ -7,7 +7,7 @@ import { CommonContext } from "../contexts/CommonContext";
 
 const SignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signInFlag, setSignInFlag, setUser, signInMdFlag, signInOpen, signUpOpen } = context;
+  const { signInFlag, setSignInFlag, signInMdFlag, signInOpen, signUpOpen } = context;
 
   // form の打ち込んだテキストを参照
   const [ inputEmail, setInputEmail ] = useState<string>('');
@@ -15,10 +15,6 @@ const SignIn = ():React.JSX.Element => {
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setUser({
-      email: inputEmail,
-      password: inputPass,
-    })
     setSignInFlag(!signInFlag)
     // console.log(inputEmail, inputPass)
     signInOpen()
