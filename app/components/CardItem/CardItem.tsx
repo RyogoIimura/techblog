@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
-  id?: number;
+  id: string;
   title: string;
   date: string;
   imageUrl: string;
@@ -40,7 +40,7 @@ export const CardItem: FC<Props> = (props) => {
   const url = page || "blog";
   return (
     <>
-      <li key={id} className={styles.postItem}>
+      <li className={styles.postItem}>
         <Link href={`/${url}/${id}`}>
           <figure>
             {imageUrl && (
