@@ -15,6 +15,16 @@ type Props = {
   page?: string;
 };
 
+const sanitizeAndTruncate = (text: string): string => {
+  // HTMLタグを除去
+  const sanitizedText = text.replace(/<\/?[^>]+(>|$)/g, "");
+
+  // 文字数を制限し、38文字以上なら...を追加
+  return sanitizedText.length > 38
+    ? `${sanitizedText.substring(0, 38)}...`
+    : sanitizedText;
+};
+
 export const CardItem: FC<Props> = (props) => {
   const {
     id,
@@ -32,7 +42,11 @@ export const CardItem: FC<Props> = (props) => {
     <>
       <li key={id} className={styles.postItem}>
         <Link href={`/${url}/${id}`}>
-          <Image src={imageUrl} alt={alt} width="400" height="100" />
+          <figure>
+            {imageUrl && (
+              <Image src={imageUrl} alt={alt} width="400" height="100" />
+            )}
+          </figure>
           <div className={styles.postItem_inner}>
             <div className={`${styles.title} mb-8`}>
               <h3>{title}</h3>
@@ -42,7 +56,9 @@ export const CardItem: FC<Props> = (props) => {
               <p className={styles.txtBlue}>{author}</p>
               <p className={`${styles.time} ${styles.txtBlue}`}>{date}</p>
             </div>
-            <p className="description">{description}</p>
+            <p className="description">
+              {description && sanitizeAndTruncate(description)}
+            </p>
           </div>
         </Link>
       </li>
