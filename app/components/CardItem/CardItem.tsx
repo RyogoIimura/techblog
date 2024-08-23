@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
-  id: string;
+  id: string | number;
   title: string;
   date: string;
   imageUrl: string;
