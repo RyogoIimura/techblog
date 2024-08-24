@@ -92,6 +92,7 @@ const page = () => {
                     author={item.author}
                     description={item.description}
                     alt="アイキャッチ"
+                    page="create"
                   />
                 ))}
               </ul>
