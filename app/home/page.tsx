@@ -1,60 +1,84 @@
 "use client";
 
-
 import React, { useEffect, useState } from 'react'
 import styles from "./home.module.css";
 import Image from 'next/image'
 import dummy from '/public/images/dummy.png'
 import searchIcon from "/public//images//search_icon.svg"
-import { Pagenation } from '../components/Pagenation'
 import { Container } from '../components/Container/Container';
 import { CardItem } from '../components/CardItem/CardItem';
+import { useSearchParams } from 'next/navigation';
 
 
 
-type Props = {
-  currentPage: number;
-  limit: number;
-  count: number;
-  path: string
+
+interface Post {
+  id: number;
+  title: string;
+  time: string;
+  category: string;
+  author: string;
+  description: string;
 }
 
 const Page = () => {
 
-  const testArray = [
-    { id: 1, title: "PostTitle1", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 2, title: "PostTitle2", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 3, title: "PostTitle3", category: "Category3", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-
-
-    { id: 4, title: "PostTitle4", category: "Category1", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 5, title: "PostTitle5", category: "Category2", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 6, title: "PostTitle6", category: "Category3", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-
-
-    { id: 7, title: "PostTitle7", category: "Category7", author: "Author1", time: "0 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 8, title: "PostTitle8", category: "Category8", author: "Author2", time: "5 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-    { id: 9, title: "PostTitle9", category: "Category9", author: "Author3", time: "10 min ago", description: "ここに記事が入りますここに記事が入りますここに記事が入りますここに記事が入ります" },
-  ];
-
-
-
-  const itemsPerPage = 3; // 1ページに表示するアイテム数
+  const itemsPerPage = 9;
   const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const searchParams = useSearchParams();
+
+
+  // 記事の取得
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch('/dummy.json');
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data: Post[] = await res.json();
+        setPosts(data);
+
+        const total = Math.ceil(data.length / itemsPerPage);
+        setTotalPages(total);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+
+  // URLパラメーターから現在のページ番号を取得
+  useEffect(() => {
+    const page = searchParams.get('page');
+    if (page) {
+      setCurrentPage(parseInt(page, 10));
+    }
+  }, [searchParams]);
+
 
   // 表示するページのアイテムを計算
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = testArray.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = posts.slice(indexOfFirstItem, indexOfLastItem);
 
-  // 全ページ数の計算
-  const totalPages = Math.ceil(testArray.length / itemsPerPage);
 
-  const handleClick = (pageNumber: number) => {
+  // ページ変更のfunction
+  const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    console.log(`${pageNumber}`);
+
+    // URL のクエリパラメーターを更新
+    const url = new URL(window.location.href);
+    url.searchParams.set('page', pageNumber.toString());
+    window.history.pushState({}, '', url.toString());
   };
 
+  // ページネーション
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
 
   return (
@@ -80,30 +104,33 @@ const Page = () => {
                   category={item.category}
                   author={item.author}
                   description={item.description}
-                  alt="アイキャッチ"
+                  alt="サムネイル"
                 />
-
               ))}
             </ul>
-            {/* <Pagenation /> */}
           </div>
 
-          <div className='flex justify-between items-center max-w-xs		mx-auto'>
-            {Array.from({ length: totalPages }, (_, index) => (
+          <div className="pagination flex justify-between items-center  max-w-md mx-auto">
+            <button
+              // カレントページが1の時disabled
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}>Prev</button>
+            {pages.map((page) => (
               <button
-                key={index + 1}
-                className={`w-14 h-14 text-center flex items-center justify-center rounded-full border-2 border-black ${
-                  currentPage === index + 1 ? 'bg-black text-white' : 'bg-white text-black'
-                }`}
-                onClick={() => handleClick(index + 1)}
-              >
-                {index + 1}
-              </button>
+                key={page}
+                className={`w-14 h-14 text-center flex items-center justify-center rounded-full border-2 border-black ${page === currentPage ? 'bg-black text-white' : 'bg-white'}`}
+                onClick={() => handlePageChange(page)}
+              >{page}</button>
             ))}
+            <button
+              // カレントページとページの総数が同じ時disabled
+              disabled={currentPage === totalPages}
+              onClick={() => handlePageChange(currentPage + 1)}
+            >Next</button>
           </div>
+
         </main>
       </Container>
-
     </>
   )
 }
