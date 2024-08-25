@@ -21,6 +21,15 @@ interface Post {
   description: string;
 }
 
+
+
+type Props = {
+  currentPage: number;
+  limit: number;
+  count: number;
+  path: string
+}
+
 const Page = () => {
 
   const itemsPerPage = 9;
@@ -81,6 +90,26 @@ const Page = () => {
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
 
+
+
+  const itemsPerPage = 3; // 1ページに表示するアイテム数
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // 表示するページのアイテムを計算
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = testArray.slice(indexOfFirstItem, indexOfLastItem);
+
+  // 全ページ数の計算
+  const totalPages = Math.ceil(testArray.length / itemsPerPage);
+
+  const handleClick = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    console.log(`${pageNumber}`);
+  };
+
+
+
   return (
     <>
       <Container>
@@ -108,6 +137,24 @@ const Page = () => {
                 />
               ))}
             </ul>
+<<<<<<< HEAD
+=======
+            {/* <Pagenation /> */}
+          </div>
+
+          <div className='flex justify-between items-center max-w-xs		mx-auto'>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                className={`w-14 h-14 text-center flex items-center justify-center rounded-full border-2 border-black ${
+                  currentPage === index + 1 ? 'bg-black text-white' : 'bg-white text-black'
+                }`}
+                onClick={() => handleClick(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+>>>>>>> 7088b0194cf55f9bb84c8545c7bfc5365c7dc4fc
           </div>
 
           <div className="pagination flex justify-between items-center  max-w-md mx-auto">
