@@ -1,6 +1,5 @@
-
-.txtBlue{
-  color: #18A0FB;
+.txtBlue {
+  color: #18a0fb;
 }
 
 .postItem {
@@ -11,10 +10,22 @@
   margin-bottom: 40px;
 }
 
-@media screen and (max-width:767px){
-  .postItem{
+@media screen and (max-width: 767px) {
+  .postItem {
     width: 48%;
   }
+}
+
+.postItem figure {
+  width: 100%;
+  aspect-ratio: 1.5 /1;
+  overflow: hidden;
+}
+
+.postItem figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .postItem .title {
@@ -29,8 +40,7 @@
   margin-bottom: 8px;
 }
 
-
-@media screen and (max-width:420px){
+@media screen and (max-width: 420px) {
   .postWrap {
     display: block;
   }

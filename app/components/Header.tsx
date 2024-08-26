@@ -7,7 +7,7 @@ import { CommonContext } from "../contexts/CommonContext";
 
 type HeaderProps = {
   page: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Header = (props: HeaderProps) => {
