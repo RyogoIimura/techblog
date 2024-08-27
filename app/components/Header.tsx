@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useContext } from "react";
+import { useSession } from "next-auth/react"
 
 import { poppins } from "../utils/fonts";
 import { HeaderButton } from "./HeaderButton";
@@ -13,6 +14,8 @@ const Header = (props: HeaderProps) => {
   const { page } = props;
   const context = useContext(CommonContext);
   const { signInFlag } = context;
+  const { data: session } = useSession()
+  // console.log(session);
 
   const headerButtonChange = () => {
     if( page === 'Write Blog'){
@@ -73,7 +76,7 @@ const Header = (props: HeaderProps) => {
           `}
           >
             {headerButtonChange()}
-            {signInFlag? HeaderButton('Logout', 'hidden md:block') : HeaderButton('Sign In', 'hidden md:block')}
+            {session? HeaderButton('Logout', 'hidden md:block') : HeaderButton('Sign In', 'hidden md:block')}
           </div>
         </div>
       </div>
@@ -100,7 +103,7 @@ const Header = (props: HeaderProps) => {
         }}
       >
         {HeaderButton('Home', 'mx-auto')}
-        {signInFlag? HeaderButton('Logout', 'mx-[auto] mt-[40px]') : HeaderButton('Sign In', 'mx-[auto] mt-[40px]')}
+        {session? HeaderButton('Logout', 'mx-[auto] mt-[40px]') : HeaderButton('Sign In', 'mx-[auto] mt-[40px]')}
       </div>
 
       {/* hamburger */}

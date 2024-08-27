@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { signOut } from "next-auth/react"
 import Link from 'next/link';
 
 import Image from "next/image";
@@ -184,7 +185,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
                 rounded-[32px]
               `}
               key='Logout'
-              onClick={handleLogout}
+              onClick={() => signOut()}
             >
               <p className={`
                 font-[26px]
