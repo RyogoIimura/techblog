@@ -9,7 +9,6 @@ export type userType = {
 export type ContextTypes = {
   signInFlag: boolean
   setSignInFlag: Dispatch<SetStateAction<boolean>>
-  setUser: Dispatch<SetStateAction<userType>>
 
   signInMdFlag: boolean
   signInOpen: () => void
@@ -21,7 +20,6 @@ export type ContextTypes = {
 export const CommonContext = createContext<ContextTypes>({
     signInFlag: false,
     setSignInFlag: () => {},
-    setUser: () => {},
 
     signInMdFlag: false,
     signInOpen: () => {},
@@ -33,12 +31,6 @@ export const CommonContext = createContext<ContextTypes>({
 export const CommonProvider = ({ children }: { children: ReactNode }) => {
   // SignIn の状態を保持
   const [signInFlag, setSignInFlag] = useState<boolean>(false);
-  // SignIn, SignUp の form に関する関数
-  const [use, setUser] = useState<userType>({
-    username: '',
-    email: '',
-    password: ''
-  });
 
   // SignIn, SignUp のモーダル表示、非表示
   const [signInMdFlag, setSignInMdFlag] = useState(false);
@@ -50,7 +42,6 @@ export const CommonProvider = ({ children }: { children: ReactNode }) => {
     <CommonContext.Provider value={{
       signInFlag,
       setSignInFlag,
-      setUser,
 
       signInMdFlag,
       signInOpen,
