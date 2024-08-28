@@ -1,9 +1,21 @@
-.morePosts{
-    @apply mt-12;
+.morePosts {
+  @apply mt-12;
 }
 
-.morePosts h3{
-    @apply font-bold;
-    font-size: 22px;
-    margin-top: 11px;
+.morePosts figure {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+}
+
+.morePosts figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.morePosts h3 {
+  @apply font-bold;
+  font-size: 22px;
+  margin-top: 11px;
 }
