@@ -9,12 +9,17 @@ import { Pagenation } from "../components/Pagenation";
 import { Container } from "../components/Container/Container";
 import { CardItem } from "../components/CardItem/CardItem";
 import Header from "../components/Header";
+import { Metadata } from "next";
 
 type Props = {
   currentPage: number;
   limit: number;
   count: number;
   path: string;
+};
+
+export const metadata: Metadata = {
+  title: "Home",
 };
 
 const Page = () => {
