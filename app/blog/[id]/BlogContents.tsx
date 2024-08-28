@@ -2,12 +2,18 @@ import Image from "next/image";
 import React, { FC } from "react";
 
 import "./BlogContents.modules.css";
+import { GetBlogType } from "@/app/utils/supabaseFunctions";
 
-const BlogContents: FC<Record<string, never>> = React.memo(() => {
+type Props = {
+  blog: GetBlogType;
+};
+
+const BlogContents: FC<Props> = React.memo((props) => {
+  const { blog } = props;
   return (
     <article className="blogArticle">
       <header className="flex justify-center md:justify-between">
-        <h1>Blog Title</h1>
+        <h1>{blog.title}</h1>
         <div className="hidden md:block rounded-full w-24 h-24 overflow-hidden">
           <Image
             src="https://picsum.photos/200/300"
@@ -20,28 +26,25 @@ const BlogContents: FC<Record<string, never>> = React.memo(() => {
       </header>
 
       <div className="mt-7">
-        <div>
-          <Image
-            src="https://picsum.photos/1200/700"
-            alt=""
-            width="1197"
-            height="618"
-            style={{ width: "100%", height: "auto" }}
-            priority
-          />
-        </div>
+        {blog.image_path && (
+          <div>
+            <Image
+              src={blog.image_path}
+              alt=""
+              width="1197"
+              height="618"
+              style={{ width: "100%", height: "auto" }}
+              priority
+            />
+          </div>
+        )}
 
-        <div className="content mt-12">
-          <p>
-            ここに文章が入ります。
-            <br />
-            ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。
-          </p>
-          <p></p>
-          <p>
-            ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。ここに文章が入ります。
-          </p>
-        </div>
+        {blog.content && (
+          <div
+            className="content mt-12"
+            dangerouslySetInnerHTML={{ __html: blog.content }}
+          />
+        )}
       </div>
     </article>
   );

@@ -7,7 +7,7 @@ type PostsType = {
   category_id: string;
   title: string;
   content: string;
-  image_path: string;
+  image_path: string | null;
   created_at: EpochTimeStamp;
   updated_at: EpochTimeStamp;
 };
@@ -18,13 +18,11 @@ const MorePostItem: FC<MorePosts> = React.memo((props) => {
   const { image_path, title } = props;
   return (
     <article>
-      <Image
-        src={image_path}
-        alt=""
-        width="333"
-        height="166"
-        style={{ width: "100%", height: "auto", objectFit: "cover" }}
-      />
+      <figure>
+        {image_path && (
+          <Image src={image_path} alt="" width="333" height="166" />
+        )}
+      </figure>
       <h3 className="font-bold">{title}</h3>
     </article>
   );
