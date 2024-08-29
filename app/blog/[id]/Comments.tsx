@@ -1,68 +1,63 @@
 "use client";
-import React, { ChangeEvent, FC, useState } from "react";
+import React, {
+  ChangeEvent,
+  FC,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 
 import "./Comments.modules.css";
 import CommentItem from "./CommentItem";
-import { getLabelTime } from "@/app/utils/dateFormat";
-
-type CommentsType = {
-  id: string;
-  user_id: string;
+import { useBlogComments } from "./BlogCommentsProvider";
+import {
+  addPostComment,
+  getPostComments,
+  PostCommentType,
+} from "@/app/utils/supabaseFunctions";
+import { v4 as uuidv4 } from "uuid";
+import { getFormatLabelTime } from "@/app/utils/dateFormat";
+type Props = {
   post_id: string;
-  content: string;
-  image_path: string;
-  created_at: Date;
-  updated_at: string;
+  postComments: Array<PostCommentType> | null;
 };
 
-type PostCommentsType = Pick<
-  CommentsType,
-  "id" | "user_id" | "content" | "image_path" | "created_at"
->;
-
-// ダミーコメント
-const sampleComments: Array<PostCommentsType> = [
-  {
-    id: "1",
-    user_id: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-    image_path: "https://picsum.photos/60/60",
-    created_at: new Date(),
-  },
-  {
-    id: "2",
-    user_id: "user",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ligula nibh, interdum non enim sit amet, iaculis aliquet nunc.",
-    image_path: "https://picsum.photos/60/60",
-    created_at: new Date(),
-  },
-];
-
-const Comments: FC<Record<string, never>> = React.memo(() => {
+const Comments: FC<Props> = React.memo((props) => {
+  const { post_id, postComments } = props;
   const [comment, setComment] = useState<string>("");
-  const [comments, setComments] =
-    useState<Array<PostCommentsType>>(sampleComments);
-
+  const { comments, setComments } = useBlogComments();
+  const [error, setError] = useState<string | null>(null);
   const handleChangeComment = (e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
 
-  const handleAddComment = () => {
-    const newComments: Array<PostCommentsType> = [
-      ...comments,
-      {
-        id: (comments.length + 1).toString(),
-        user_id: "user",
-        content: comment,
-        image_path: "https://picsum.photos/60/60",
-        created_at: new Date(),
-      },
-    ];
-    setComments(newComments);
-    setComment("");
-  };
+  const handleAddComment = useCallback(async () => {
+    if (comment === "") {
+      alert("コメントを入力してください。");
+      return;
+    }
+    const newComment: PostCommentType = {
+      id: uuidv4(),
+      user_id: "1",
+      post_id,
+      content: comment,
+      created_at: "",
+    };
+    const { error } = await addPostComment(newComment);
+    if (error) {
+      setError(`保存に失敗しました: ${error.message}`);
+    } else {
+      setError(null);
+      setComment("");
+      const { data: postComments } = await getPostComments(post_id); // 記事に紐づいたコメントデータ取得
+      postComments && setComments(postComments);
+    }
+  }, [comment]);
+
+  useEffect(() => {
+    postComments && setComments(postComments);
+  }, [setComments]);
+
   return (
     <section className="blogComments">
       <h2>Comments</h2>
@@ -77,15 +72,16 @@ const Comments: FC<Record<string, never>> = React.memo(() => {
         <button onClick={handleAddComment}>Comment</button>
       </div>
       <div className="mt-7 flex flex-col gap-9">
-        {comments.map((comment) => (
-          <CommentItem
-            key={comment.id}
-            user_id={comment.user_id}
-            image_path={comment.image_path}
-            content={comment.content}
-            dateTime={getLabelTime(comment.created_at)}
-          />
-        ))}
+        {comments &&
+          comments.map((comment) => (
+            <CommentItem
+              key={comment.id}
+              user_id={comment.user_id}
+              image_path="https://picsum.photos/60/60"
+              content={comment.content}
+              dateTime={getFormatLabelTime(comment.created_at)}
+            />
+          ))}
       </div>
     </section>
   );

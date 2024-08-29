@@ -1,6 +1,7 @@
 .blogComments {
   width: min(100%, 771px);
   margin: 50px auto 0;
+  padding-bottom: 100px;
 }
 
 .blogComments button {
