@@ -8,7 +8,7 @@ import { CommonContext } from "../contexts/CommonContext";
 
 const AppSignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signInFlag, setSignInFlag, signInMdFlag, signInOpen, signUpOpen } = context;
+  const { signInFlag, setSignInFlag, setUser, signInMdFlag, signInOpen, signUpOpen } = context;
   const { data: session } = useSession()
   // console.log(session);
 
