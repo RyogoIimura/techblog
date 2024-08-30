@@ -8,6 +8,7 @@ import searchIcon from "/public//images//search_icon.svg"
 import { Container } from '../components/Container/Container';
 import { CardItem } from '../components/CardItem/CardItem';
 import { useSearchParams } from 'next/navigation';
+import Header from '../components/Header';
 
 
 
@@ -83,13 +84,19 @@ const Page = () => {
 
   return (
     <>
-      <Container>
-        <main className='p-4'>
+      <Header page="Home"></Header>
+      <Container className="pt-10" style={{paddingTop:"100px"}}>
+        <main className="p-4">
           <div className={styles.searchBox}>
             <input type="text" placeholder="検索ワード" />
             <button type="submit">
-              <Image src={searchIcon} width={24} style={{ height: 'auto' }} alt='' />
-            </button >
+              <Image
+                src={searchIcon}
+                width={24}
+                style={{ height: "auto" }}
+                alt=""
+              />
+            </button>
           </div>
 
           <div className="mx-auto mt-0 mb-0">
@@ -132,7 +139,7 @@ const Page = () => {
         </main>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
