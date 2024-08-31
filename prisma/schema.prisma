@@ -1,0 +1,93 @@
+
+datasource db {
+  provider = "postgresql"
+  url      = env("NEXT_PUBLIC_DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  posts         posts[]
+  comments      comments[]
+}
+
+model categories {
+  id            String    @id @default(cuid())
+  name          String?
+  created_at	  DateTime
+  updated_at	  DateTime
+  posts         posts[]
+}
+
+model posts {
+  id            String    @id @default(cuid())
+  user_id	      String
+  category_id	  String
+  title	        String
+  content	      String
+  image_path	  String
+  created_at	  DateTime
+  updated_at	  DateTime
+  comments      comments[]
+
+  user          User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  category      categories @relation(fields: [category_id], references: [id], onDelete: Cascade)
+}
+
+model comments {
+  id            String    @id @default(cuid())
+  user_id	      String
+  post_id	      String
+  content	      String
+  created_at	  DateTime
+  updated_at	  DateTime
+
+  user          User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  post          posts @relation(fields: [post_id], references: [id], onDelete: Cascade)
+}
