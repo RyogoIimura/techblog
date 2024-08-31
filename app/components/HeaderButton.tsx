@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useSession } from "next-auth/react"
 import { signOut } from "next-auth/react"
 import Link from 'next/link';
 
@@ -11,15 +12,12 @@ import { CommonContext } from "../contexts/CommonContext";
 
 export const HeaderButton = (name: string, button?: string, p?: string) => {
   const context = useContext(CommonContext);
-  const { signInFlag, setSignInFlag, signInOpen } = context;
+  const { signInOpen } = context;
+  const { data: session } = useSession()
+  console.log(session);
 
   const [logoutMdFlag, setLogoutMdFlag] = useState(false);
   const logoutOpen = () => setLogoutMdFlag(!logoutMdFlag);
-  const handleLogout = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    setSignInFlag(!signInFlag)
-  }
 
   if( name === 'Create'){
     return (
@@ -128,8 +126,8 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
   if( name === 'Logout'){
     return (
       <div className={`
-          w-fit
-          h-fit
+          w-[48px]
+          h-[48px]
           relative
 
           md:my-auto
@@ -138,19 +136,21 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
         `}
       >
         <button className={`
-            w-fit
-            h-fit
+            w-[100%]
+            h-[100%]
           `}
           key='Logout Open'
           onClick={() => logoutOpen()}
         >
           <Image
-            className={`
-              w-[48px]
-              h-auto
-            `}
-            src={UserLogo}
+            src={session.user?.image ?? UserLogo}
             alt="UserLogo"
+            fill={true}
+            className={`
+              w-[100%]
+              h-[100%]
+              rounded-[50%]
+            `}
           />
         </button>
         {logoutMdFlag ? (
