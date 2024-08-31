@@ -14,7 +14,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
   const context = useContext(CommonContext);
   const { signInOpen } = context;
   const { data: session } = useSession()
-  console.log(session);
+  // console.log(session);
 
   const [logoutMdFlag, setLogoutMdFlag] = useState(false);
   const logoutOpen = () => setLogoutMdFlag(!logoutMdFlag);
