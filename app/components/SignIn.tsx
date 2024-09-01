@@ -1,28 +1,31 @@
 'use client';
 import React, { useState, useContext } from "react";
+import { signIn, useSession } from "next-auth/react"
 
 import FormInput from "./FormInput";
 import { poppins } from "../utils/fonts";
 import { CommonContext } from "../contexts/CommonContext";
 
-const SignIn = ():React.JSX.Element => {
+const AppSignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
   const { signInFlag, setSignInFlag, setUser, signInMdFlag, signInOpen, signUpOpen } = context;
+  const { data: session } = useSession()
+  // console.log(session);
 
   // form の打ち込んだテキストを参照
-  const [ inputEmail, setInputEmail ] = useState<string>('');
-  const [ inputPass, setInputPass ] = useState<string>('');
-  const handleSignIn = (e: React.FormEvent) => {
-    e.preventDefault();
+  // const [ inputEmail, setInputEmail ] = useState<string>('');
+  // const [ inputPass, setInputPass ] = useState<string>('');
+  // const handleSignIn = (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    setUser({
-      email: inputEmail,
-      password: inputPass,
-    })
-    setSignInFlag(!signInFlag)
-    // console.log(inputEmail, inputPass)
-    signInOpen()
-  }
+  //   setUser({
+  //     email: inputEmail,
+  //     password: inputPass,
+  //   })
+  //   setSignInFlag(!signInFlag)
+  //   // console.log(inputEmail, inputPass)
+  //   signInOpen()
+  // }
 
   return (
     <>
@@ -33,7 +36,74 @@ const SignIn = ():React.JSX.Element => {
               className="w-screen h-screen bg-black opacity-50 hidden md:block"
               onClick={() => signInOpen()}
             ></div>
-            <form
+
+            <div
+              className="
+              bg-white
+              w-full
+              box-border
+              px-[calc(100vw*(32/750))]
+              py-[calc(100vw*(258/750))]
+              relative
+
+              md:w-fit
+              md:rounded-[14px]
+              md:absolute
+              md:top-1/2
+              md:left-1/2
+              md:transform
+              md:translate-x-[-50%]
+              md:translate-y-[-50%]
+              md:px-[50px]
+              md:py-[28px]"
+            >
+              <p className={`
+                ${poppins.className}
+                font-semibold
+                w-fit
+                mx-auto
+                relative
+                underline
+                text-[calc(100vw*(60/750))]
+
+                md:text-3xl
+              `}>Sign In</p>
+              <div className="
+                w-[100%]
+                flex
+                justify-center
+                mt-[calc(100vw*(86/750))]
+
+                md:mt-[36px]
+              ">
+                {!session && (
+                  <button
+                    className={`
+                      bg-[#3094d2]
+                      rounded-[calc(100vw*(47/750))]
+                      px-[calc(100vw*(72/750))]
+                      py-[calc(100vw*(18/750))]
+
+                      md:rounded-[58px]
+                      md:px-[42px]
+                      md:py-[14px]
+                    `}
+                    onClick={() => signIn()}
+                  >
+                    <p className={`
+                      ${poppins.className}
+                      text-white
+                      text-[calc(100vw*(38/750))]
+
+                      md:text-[20px]
+                    `}
+                    >Sign In</p>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* <form
               className="
               bg-white
               w-full
@@ -172,7 +242,7 @@ const SignIn = ():React.JSX.Element => {
                 ></div>
               </div>
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       ) : (<></>)}
@@ -180,4 +250,4 @@ const SignIn = ():React.JSX.Element => {
   );
 };
 
-export default SignIn;
+export default AppSignIn;
