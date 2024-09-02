@@ -6,8 +6,8 @@ import Header from "../components/Header";
 import { CardItem } from "../components/CardItem/CardItem";
 import { getLabelTime } from "../utils/dateFormat";
 import styles from "../home/home.module.css";
-import "./profile.modules.css";
-import { Pagenation } from "../components/Pagenation";
+// import "./profile.modules.css";
+// import { Pagenation } from "../components/Pagenation";
 
 const testArray = [
   {
@@ -97,7 +97,7 @@ const page = () => {
                 ))}
               </ul>
             </div>
-            <Pagenation />
+            {/* <Pagenation /> */}
           </article>
         </main>
       </Container>
