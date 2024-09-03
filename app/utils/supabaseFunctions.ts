@@ -1,5 +1,5 @@
 import { create } from "domain";
-import { supabase } from "./supabase";
+import { supabase } from "../utils/supabase";
 import { PostgrestError } from "@supabase/supabase-js";
 import { getFormatParseDateTime, getNowParseDateTime } from "./dateFormat";
 
@@ -9,6 +9,12 @@ export type GetBlogType = {
     title: string;
     content: string;
     image_path: string | null;
+}
+
+
+export const getAllPosts = async () => {
+    const posts = await supabase.from("").select("*");
+    return posts.data;
 }
 
 export const getBlog = async (id: string): Promise<{ data: GetBlogType | null; }> => {
