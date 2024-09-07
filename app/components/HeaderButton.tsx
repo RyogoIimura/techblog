@@ -163,7 +163,7 @@ export const HeaderButton = (
           onClick={() => logoutOpen()}
         >
           <Image
-            src={session.user?.image ?? UserLogo}
+            src={session?.user?.image ?? UserLogo}
             alt="UserLogo"
             fill={true}
             className={`
