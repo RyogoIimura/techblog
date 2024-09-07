@@ -1,31 +1,24 @@
 "use client";
 
+import { getFormatLabelTime } from "@/app/utils/dateFormat";
+import { PostCommentType, UserType } from "@/app/utils/supabaseFunctions";
 import Image from "next/image";
 import React, { FC } from "react";
 
-type CommentsType = {
-  id: string;
-  user_id: string;
-  post_id: string;
-  content: string;
-  image_path: string;
-  created_at: Date;
-  updated_at: Date;
+type Props = {
+  comment: PostCommentType;
 };
-
-type PostCommentsType = Pick<
-  CommentsType,
-  "user_id" | "content" | "image_path"
->;
-
-type PostCommentsTimeType = {
-  dateTime: string;
-};
-
-type Props = PostCommentsType & PostCommentsTimeType;
 
 const CommentItem: FC<Props> = React.memo((props) => {
-  const { user_id, content, image_path, dateTime } = props;
+  const { comment } = props;
+  const users = comment.User;
+  const user = users
+    ? (users as Pick<UserType, "name" | "image">)
+    : { name: "" };
+  const name = user.name || "";
+  const image = user.image || "";
+  const { content, created_at } = comment;
+  const dateTime = getFormatLabelTime(created_at);
   return (
     <article
       className="flex gap-11 p-5"
@@ -33,7 +26,7 @@ const CommentItem: FC<Props> = React.memo((props) => {
     >
       <div className="shrink-0">
         <Image
-          src={image_path}
+          src={image}
           alt=""
           width="60"
           height="60"
@@ -44,7 +37,7 @@ const CommentItem: FC<Props> = React.memo((props) => {
             borderRadius: "50%",
           }}
         />
-        <h3 className="font-normal text-lg mt-2.5 text-lg">{user_id}</h3>
+        <h3 className="font-normal text-lg mt-2.5 text-lg">{name}</h3>
       </div>
       <div className="flex-1">
         <p>{content}</p>
