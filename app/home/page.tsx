@@ -8,8 +8,8 @@ import searchIcon from "/public//images//search_icon.svg"
 import { Container } from '../components/Container/Container';
 import { CardItem } from "../components/CardItem/CardItem";
 import { useSearchParams } from 'next/navigation';
-import Header from '../components/Header';
 import { getAllPosts } from '../utils/supabaseFunctions';
+import Header from "../components/Header";
 
 
 
@@ -48,7 +48,8 @@ const Page = () => {
 	// 記事の取得
 	useEffect(() => {
 	  const fetchPosts = async () => {
-	    try {
+			try {
+				// モックのjsonの場合
 	      // const res = await fetch("/dummy.json");
 	      // if (!res.ok) {
 	      //   throw new Error("Failed to fetch data");
@@ -117,7 +118,8 @@ const Page = () => {
 
 	return (
 		<>
-			<Container>
+			<Header page='Home'></Header>
+			<Container style={{paddingTop:"100px"}}>
 				<main className='p-4'>
 					<div className={styles.searchBox}>
 						<input
@@ -144,7 +146,7 @@ const Page = () => {
 									id={item.id}
 									title={item.title}
 									date={item.time}
-									imageUrl={item.image_path || '/images/dummy.png'}
+									imageUrl={item.image_path || "/images/dummy.png"}
 									category={item.category}
 									author={item.author}
 									description={item.description}
