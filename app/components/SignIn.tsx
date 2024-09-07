@@ -1,14 +1,31 @@
 'use client';
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { signIn, useSession } from "next-auth/react"
 
+import FormInput from "./FormInput";
 import { poppins } from "../utils/fonts";
 import { CommonContext } from "../contexts/CommonContext";
 
 const AppSignIn = ():React.JSX.Element => {
   const context = useContext(CommonContext);
-  const { signInMdFlag, signInOpen } = context;
+  const { signInFlag, setSignInFlag, setUser, signInMdFlag, signInOpen, signUpOpen } = context;
   const { data: session } = useSession()
+  // console.log(session);
+
+  // form の打ち込んだテキストを参照
+  // const [ inputEmail, setInputEmail ] = useState<string>('');
+  // const [ inputPass, setInputPass ] = useState<string>('');
+  // const handleSignIn = (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   setUser({
+  //     email: inputEmail,
+  //     password: inputPass,
+  //   })
+  //   setSignInFlag(!signInFlag)
+  //   // console.log(inputEmail, inputPass)
+  //   signInOpen()
+  // }
 
   return (
     <>

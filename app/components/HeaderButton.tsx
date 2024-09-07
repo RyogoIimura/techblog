@@ -1,12 +1,6 @@
 import React, { useState, useContext } from "react";
-<<<<<<< HEAD
-import { useSession } from "next-auth/react"
-import { signOut } from "next-auth/react"
-import Link from 'next/link';
-=======
 import { signOut } from "next-auth/react";
 import Link from "next/link";
->>>>>>> main
 
 import Image from "next/image";
 import PenLogo from "../../public/images/pen_logo.svg";
@@ -21,20 +15,15 @@ export const HeaderButton = (
   onClick?: () => void
 ) => {
   const context = useContext(CommonContext);
-  const { signInOpen } = context;
-  const { data: session } = useSession()
-  // console.log(session);
+  const { signInFlag, setSignInFlag, signInOpen } = context;
 
   const [logoutMdFlag, setLogoutMdFlag] = useState(false);
   const logoutOpen = () => setLogoutMdFlag(!logoutMdFlag);
-<<<<<<< HEAD
-=======
   const handleLogout = (e: React.FormEvent) => {
     e.preventDefault();
 
     setSignInFlag(!signInFlag);
   };
->>>>>>> main
 
   if (name === "Create") {
     return (
@@ -158,16 +147,10 @@ export const HeaderButton = (
   }
   if (name === "Logout") {
     return (
-<<<<<<< HEAD
-      <div className={`
-          w-[48px]
-          h-[48px]
-=======
       <div
         className={`
           w-fit
           h-fit
->>>>>>> main
           relative
 
           md:my-auto
@@ -175,29 +158,21 @@ export const HeaderButton = (
           ${button}
         `}
       >
-<<<<<<< HEAD
-        <button className={`
-            w-[100%]
-            h-[100%]
-=======
         <button
           className={`
             w-fit
             h-fit
->>>>>>> main
           `}
           key="Logout Open"
           onClick={() => logoutOpen()}
         >
           <Image
-            src={session.user?.image ?? UserLogo}
-            alt="UserLogo"
-            fill={true}
             className={`
-              w-[100%]
-              h-[100%]
-              rounded-[50%]
+              w-[48px]
+              h-auto
             `}
+            src={UserLogo}
+            alt="UserLogo"
           />
         </button>
         {logoutMdFlag ? (
