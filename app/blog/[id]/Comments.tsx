@@ -14,9 +14,9 @@ import {
   addPostComment,
   getPostComments,
   PostCommentType,
+  UserType,
 } from "@/app/utils/supabaseFunctions";
 import { v4 as uuidv4 } from "uuid";
-import { getFormatLabelTime } from "@/app/utils/dateFormat";
 type Props = {
   post_id: string;
   postComments: Array<PostCommentType> | null;
@@ -25,20 +25,24 @@ type Props = {
 const Comments: FC<Props> = React.memo((props) => {
   const { post_id, postComments } = props;
   const [comment, setComment] = useState<string>("");
-  const { comments, setComments } = useBlogComments();
+  const { comments, setComments, loginUser } = useBlogComments();
   const [error, setError] = useState<string | null>(null);
   const handleChangeComment = (e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.target.value);
   };
 
   const handleAddComment = useCallback(async () => {
+    if (!loginUser) {
+      setError("認証に失敗しました。");
+      return;
+    }
     if (comment === "") {
-      alert("コメントを入力してください。");
+      setError("コメントを入力してください。");
       return;
     }
     const newComment: PostCommentType = {
       id: uuidv4(),
-      user_id: "1",
+      user_id: loginUser.id!,
       post_id,
       content: comment,
       created_at: "",
@@ -52,11 +56,11 @@ const Comments: FC<Props> = React.memo((props) => {
       const { data: postComments } = await getPostComments(post_id); // 記事に紐づいたコメントデータ取得
       postComments && setComments(postComments);
     }
-  }, [comment]);
+  }, [comment, setComments, loginUser, post_id]);
 
   useEffect(() => {
     postComments && setComments(postComments);
-  }, [setComments]);
+  }, [setComments, postComments]);
 
   return (
     <section className="blogComments">
@@ -70,17 +74,12 @@ const Comments: FC<Props> = React.memo((props) => {
           onChange={handleChangeComment}
         />
         <button onClick={handleAddComment}>Comment</button>
+        {error && <p className="text-red-500 mt-2">{error}</p>}
       </div>
       <div className="mt-7 flex flex-col gap-9">
         {comments &&
           comments.map((comment) => (
-            <CommentItem
-              key={comment.id}
-              user_id={comment.user_id}
-              image_path="https://picsum.photos/60/60"
-              content={comment.content}
-              dateTime={getFormatLabelTime(comment.created_at)}
-            />
+            <CommentItem key={comment.id} comment={comment} />
           ))}
       </div>
     </section>
