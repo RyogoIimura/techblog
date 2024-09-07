@@ -20,7 +20,6 @@ import React, {
 export type BlogCommentsContextType = {
   comments: Array<PostCommentType>;
   setComments: Dispatch<SetStateAction<Array<PostCommentType>>>;
-  session: Session | null;
   loginUser: UserType | null;
 };
 
@@ -49,9 +48,7 @@ const BlogCommentsProvider = (props: { children: ReactNode }) => {
   }, [session]);
 
   return (
-    <BlogCommentsContext.Provider
-      value={{ comments, setComments, session, loginUser }}
-    >
+    <BlogCommentsContext.Provider value={{ comments, setComments, loginUser }}>
       {children}
     </BlogCommentsContext.Provider>
   );
