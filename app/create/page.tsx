@@ -3,8 +3,9 @@
 import Header from "@/app/components/Header";
 import ImageUploadeSection from "@/app/create/components/ImageUploadeSection";
 import { supabase } from "@/app/utils/supabase";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // React-Quillを動的にインポートし、SSRを無効にする
@@ -14,18 +15,36 @@ const QuillEditor = dynamic(() => import("./components/QuillEditor"), {
 
 function CreatePage() {
   // タイトル、本文、画像のURLを管理するステート
+  const { data: session } = useSession();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const [user, setUser] = useState<{ id: string }>({ id: "" });
   // 画像がアップロードされたときに呼ばれるコールバック関数
   const handleImageUpload = (url: string) => {
     setImageUrl(url);
   };
 
+  const name = session?.user?.name;
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await supabase
+        .from("User")
+        .select("id")
+        .eq("name", name)
+        .single();
+      data && setUser(data);
+    };
+    name && getUser();
+  }, [session]);
+
   // 投稿をデータベースに保存する処理
   const handleSavePost = async () => {
+    if (!user) {
+      setError("認証失敗");
+      return;
+    }
     if (!title || !content || !imageUrl) {
       setError("すべてのフィールドを入力してください。");
       return;
@@ -34,7 +53,7 @@ function CreatePage() {
     const { error } = await supabase.from("posts").insert([
       {
         id: uuidv4(),
-        user_id: 1, // TODO:ユーザーIDは仮で1を設定（後で実際のユーザーIDを取得するように変更）
+        user_id: user.id, // TODO:ユーザーIDは仮で1を設定（後で実際のユーザーIDを取得するように変更）
         category_id: 1, // TODO:カテゴリーIDについても別途実装
         title: title,
         content: content,
