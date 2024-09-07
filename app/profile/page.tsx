@@ -3,12 +3,12 @@ import React from "react";
 import { Container } from "../components/Container/Container";
 import Header from "../components/Header";
 import { CardItem } from "../components/CardItem/CardItem";
-import { getFormatLabelTime, getLabelTime } from "../utils/dateFormat";
+import { getFormatLabelTime } from "../utils/dateFormat";
 import styles from "../home/home.module.css";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { notFound } from "next/navigation";
 import { supabase } from "../utils/supabase";
+import { authOptions } from "../utils/authOptions";
 
 const testArray = [
   {
