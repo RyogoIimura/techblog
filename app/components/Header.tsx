@@ -1,25 +1,37 @@
-'use client'
+"use client";
 import React, { useState, useContext } from "react";
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 
 import { poppins } from "../utils/fonts";
 import { HeaderButton } from "./HeaderButton";
 
 type HeaderProps = {
-  page: string
+  page: string;
+  onClick?: () => void;
 };
 
 const Header = (props: HeaderProps) => {
+<<<<<<< HEAD
   const { page } = props;
   const { data: session } = useSession()
+=======
+  const { page, onClick } = props;
+  const context = useContext(CommonContext);
+  const { signInFlag } = context;
+  const { data: session } = useSession();
+  // console.log(session);
+>>>>>>> main
 
   const headerButtonChange = () => {
-    if( page === 'Write Blog'){
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Publish') ]
+    if (page === "Write Blog") {
+      return [
+        HeaderButton("Home", "hidden md:block"),
+        HeaderButton("Publish", undefined, undefined, onClick),
+      ];
     } else {
-      return [ HeaderButton('Home', 'hidden md:block'), HeaderButton('Create') ]
+      return [HeaderButton("Home", "hidden md:block"), HeaderButton("Create")];
     }
-  }
+  };
 
   const [navFlag, setNavFlag] = useState<boolean>(false);
   const navOpen = () => setNavFlag(!navFlag);
@@ -27,14 +39,17 @@ const Header = (props: HeaderProps) => {
   return (
     <>
       {/* header */}
-      <div className={`
+      <div
+        className={`
         w-full
         fixed
         z-100
         top-0
         left-0
-      `}>
-        <div className={`
+      `}
+      >
+        <div
+          className={`
           w-full
           bg-[#d9d9d9]
           relative
@@ -43,7 +58,8 @@ const Header = (props: HeaderProps) => {
           md:h-[90px]
         `}
         >
-          <p className={`
+          <p
+            className={`
             ${poppins.className}
             text-[34px]
             text-[#6b6b6b]
@@ -56,8 +72,12 @@ const Header = (props: HeaderProps) => {
             left-[calc(100vw*(68/750))]
 
             md:left-[50px]
-          `}>LOGO</p>
-          <div className={`
+          `}
+          >
+            LOGO
+          </p>
+          <div
+            className={`
             absolute
             top-[50%]
             right-0
@@ -72,7 +92,9 @@ const Header = (props: HeaderProps) => {
           `}
           >
             {headerButtonChange()}
-            {session? HeaderButton('Logout', 'hidden md:block') : HeaderButton('Sign In', 'hidden md:block')}
+            {session
+              ? HeaderButton("Logout", "hidden md:block")
+              : HeaderButton("Sign In", "hidden md:block")}
           </div>
         </div>
       </div>
@@ -91,19 +113,27 @@ const Header = (props: HeaderProps) => {
           flex
           flex-col
           transform
-          ${navFlag ? 'translate-x-0 opacity-[1]' : 'translate-x-[100%] opacity-[0]'}
+          ${
+            navFlag
+              ? "translate-x-0 opacity-[1]"
+              : "translate-x-[100%] opacity-[0]"
+          }
           md:hidden
         `}
         style={{
-          transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
+          transition:
+            "opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        {HeaderButton('Home', 'mx-auto')}
-        {session? HeaderButton('Logout', 'mx-[auto] mt-[40px]') : HeaderButton('Sign In', 'mx-[auto] mt-[40px]')}
+        {HeaderButton("Home", "mx-auto")}
+        {session
+          ? HeaderButton("Logout", "mx-[auto] mt-[40px]")
+          : HeaderButton("Sign In", "mx-[auto] mt-[40px]")}
       </div>
 
       {/* hamburger */}
-      <button className={`
+      <button
+        className={`
           fixed
           z-110
           top-0
@@ -115,51 +145,61 @@ const Header = (props: HeaderProps) => {
 
           md:hidden
         `}
-        aria-label='hamburger'
+        aria-label="hamburger"
         onClick={() => navOpen()}
       >
-        <div className={`
+        <div
+          className={`
           w-[36px]
           h-[24px]
           my-auto
           relative
-        `}>
-          <div className={`
+        `}
+        >
+          <div
+            className={`
               w-[100%]
               h-[3px]
               bg-black
               absolute
               left-0
-              ${navFlag ? 'top-[calc(50%-1.5px)] rotate-[45deg]' : 'top-[0]'}
+              ${navFlag ? "top-[calc(50%-1.5px)] rotate-[45deg]" : "top-[0]"}
             `}
             style={{
-              transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
+              transition: "transform .6s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           ></div>
-          <div className={`
+          <div
+            className={`
             w-[100%]
             h-[3px]
             bg-black
             absolute
             left-0
             top-[calc(50%-1.5px)]
-            ${navFlag ? 'opacity-[0]' : 'opacity-[1]'}
+            ${navFlag ? "opacity-[0]" : "opacity-[1]"}
             `}
             style={{
-              transition: 'opacity .6s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}>
-          </div>
-          <div className={`
+              transition: "opacity .6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          ></div>
+          <div
+            className={`
             w-[100%]
             h-[3px]
             bg-black
             absolute
             left-0
-            ${navFlag ? 'bottom-[calc(50%-1.5px)] rotate-[-45deg]' : 'bottom-[0]'}
+            ${
+              navFlag
+                ? "bottom-[calc(50%-1.5px)] rotate-[-45deg]"
+                : "bottom-[0]"
+            }
             `}
             style={{
-              transition: 'transform .6s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}></div>
+              transition: "transform .6s cubic-bezier(0.16, 1, 0.3, 1)",
+            }}
+          ></div>
         </div>
       </button>
     </>

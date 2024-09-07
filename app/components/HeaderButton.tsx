@@ -1,16 +1,25 @@
 import React, { useState, useContext } from "react";
+<<<<<<< HEAD
 import { useSession } from "next-auth/react"
 import { signOut } from "next-auth/react"
 import Link from 'next/link';
+=======
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+>>>>>>> main
 
 import Image from "next/image";
-import PenLogo from '../../public/images/pen_logo.svg';
-import UserLogo from '../../public/images/user_logo.svg';
+import PenLogo from "../../public/images/pen_logo.svg";
+import UserLogo from "../../public/images/user_logo.svg";
 import { poppins } from "../utils/fonts";
 import { CommonContext } from "../contexts/CommonContext";
 
-
-export const HeaderButton = (name: string, button?: string, p?: string) => {
+export const HeaderButton = (
+  name: string,
+  button?: string,
+  p?: string,
+  onClick?: () => void
+) => {
   const context = useContext(CommonContext);
   const { signInOpen } = context;
   const { data: session } = useSession()
@@ -18,10 +27,19 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
 
   const [logoutMdFlag, setLogoutMdFlag] = useState(false);
   const logoutOpen = () => setLogoutMdFlag(!logoutMdFlag);
+<<<<<<< HEAD
+=======
+  const handleLogout = (e: React.FormEvent) => {
+    e.preventDefault();
 
-  if( name === 'Create'){
+    setSignInFlag(!signInFlag);
+  };
+>>>>>>> main
+
+  if (name === "Create") {
     return (
-      <Link className={`
+      <Link
+        className={`
           w-fit
           h-fit
           bg-[#383838]
@@ -37,7 +55,7 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           md:ml-[24px]
           ${button}
         `}
-        key='Create'
+        key="Create"
         href="./create"
       >
         <Image
@@ -53,20 +71,25 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           src={PenLogo}
           alt="PenLogo"
         />
-        <p className={`
+        <p
+          className={`
           ${poppins.className}
           text-white
           text-[14px]
 
           md:text-[14px]
           ${p}
-        `}>Create</p>
+        `}
+        >
+          Create
+        </p>
       </Link>
-    )
+    );
   }
-  if( name === 'Sign In'){
+  if (name === "Sign In") {
     return (
-      <button className={`
+      <button
+        className={`
           w-fit
           h-fit
           bg-[#d9d9d9]
@@ -80,23 +103,29 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           md:ml-[24px]
           ${button}
         `}
-        key='Sign In'
+        key="Sign In"
         onClick={() => signInOpen()}
       >
-        <p className={`
+        <p
+          className={`
           ${poppins.className}
           text-[#383838]
           text-[14px]
 
           md:text-[14px]
           ${p}
-        `}>Sign In</p>
+        `}
+        >
+          Sign In
+        </p>
       </button>
-    )
+    );
   }
-  if( name === 'Publish'){
+  if (name === "Publish") {
     return (
-      <button className={`
+      <button
+        onClick={onClick}
+        className={`
           ${button}
           w-fit
           h-fit
@@ -110,24 +139,35 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
 
           md:ml-[24px]
         `}
-        key='Publish'
+        key="Publish"
       >
-        <p className={`
+        <p
+          className={`
           ${poppins.className}
           text-[#000]
           text-[14px]
 
           md:text-[14px]
           ${p}
-        `}>Publish</p>
+        `}
+        >
+          Publish
+        </p>
       </button>
-    )
+    );
   }
-  if( name === 'Logout'){
+  if (name === "Logout") {
     return (
+<<<<<<< HEAD
       <div className={`
           w-[48px]
           h-[48px]
+=======
+      <div
+        className={`
+          w-fit
+          h-fit
+>>>>>>> main
           relative
 
           md:my-auto
@@ -135,11 +175,18 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           ${button}
         `}
       >
+<<<<<<< HEAD
         <button className={`
             w-[100%]
             h-[100%]
+=======
+        <button
+          className={`
+            w-fit
+            h-fit
+>>>>>>> main
           `}
-          key='Logout Open'
+          key="Logout Open"
           onClick={() => logoutOpen()}
         >
           <Image
@@ -154,7 +201,8 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           />
         </button>
         {logoutMdFlag ? (
-          <div className={`
+          <div
+            className={`
             w-fit
             h-fit
             px-[18px]
@@ -167,15 +215,21 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
             transform
             translate-x-[-50%]
             translate-y-[calc(100%+6px)]
-          `}>
-            <p className={`
+          `}
+          >
+            <p
+              className={`
               font-[26px]
               font-semibold
               whitespace-nowrap
               text-center
               ${poppins.className}
-            `}>User name</p>
-            <button className={`
+            `}
+            >
+              User name
+            </p>
+            <button
+              className={`
                 w-fit
                 y-fit
                 px-[30px]
@@ -184,25 +238,32 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
                 bg-[rgba(255,49,49,.5)]
                 rounded-[32px]
               `}
-              key='Logout'
+              key="Logout"
               onClick={() => signOut()}
             >
-              <p className={`
+              <p
+                className={`
                 font-[26px]
                 font-semibold
                 whitespace-nowrap
                 text-center
                 ${poppins.className}
-              `}>Logout</p>
+              `}
+              >
+                Logout
+              </p>
             </button>
           </div>
-        ) : (<></>)}
+        ) : (
+          <></>
+        )}
       </div>
-    )
+    );
   }
-  if( name === 'Home'){
+  if (name === "Home") {
     return (
-      <Link className={`
+      <Link
+        className={`
           w-fit
           h-fit
           bg-[#383838]
@@ -215,18 +276,22 @@ export const HeaderButton = (name: string, button?: string, p?: string) => {
           md:my-auto
           ${button}
         `}
-        key='Home'
+        key="Home"
         href="./home"
       >
-        <p className={`
+        <p
+          className={`
           ${poppins.className}
           text-white
           text-[14px]
 
           md:block
           ${p}
-        `}>Home</p>
+        `}
+        >
+          Home
+        </p>
       </Link>
-    )
+    );
   }
 };

@@ -2,12 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./home.module.css";
-import Image from "next/image";
-import dummy from "/public/images/dummy.png";
-import searchIcon from "/public//images//search_icon.svg";
-import { Container } from "../components/Container/Container";
-import { CardItem } from "../components/CardItem/CardItem";
-import { useSearchParams } from "next/navigation";
+import Image from 'next/image'
+// import dummy from '/public/images/dummy.png'
+import searchIcon from "/public//images//search_icon.svg"
+import { Container } from '../components/Container/Container';
+import { CardItem } from '../components/CardItem/CardItem';
+import { useSearchParams } from 'next/navigation';
+import Header from '../components/Header';
+import { getAllPosts } from '../utils/supabaseFunctions';
+
+
+
+
 
 interface Post {
   id: number;
@@ -26,6 +32,22 @@ const Page = () => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [filterdPosts, setFilteredPosts] = useState<Post[]>([]);
   const searchParams = useSearchParams();
+
+
+
+  const [items,setItems] = useState<any>([]);
+
+  useEffect(() => {
+    const getItems = async () => {
+      const items = await getAllPosts();
+      setItems(items)
+      console.log(items)
+    };
+    getItems();
+   },[])
+
+
+
 
   // 記事の取得
   useEffect(() => {
