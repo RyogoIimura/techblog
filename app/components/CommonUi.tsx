@@ -1,6 +1,5 @@
 'use client';
 
-import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Header from "./Header";
 import { CommonProvider } from "../contexts/CommonContext";
@@ -15,7 +14,6 @@ const CommonUi = (props: CommonUiProps) => {
   return (
     <CommonProvider>
       <Header page={name} />
-      <SignUp />
       <SignIn />
     </CommonProvider>
   )
