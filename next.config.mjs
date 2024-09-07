@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['picsum.photos', 'enzejypzafacxwjdajnd.supabase.co', 'lh3.googleusercontent.com', 'rfbshavdgwysigcizyjl.supabase.co'],
+        domains: ['picsum.photos', 'rfbshavdgwysigcizyjl.supabase.co', 'lh3.googleusercontent.com'],
     },
 };
 

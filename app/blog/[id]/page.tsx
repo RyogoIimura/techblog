@@ -5,7 +5,12 @@ import MorePosts from "./MorePosts";
 import Comments from "./Comments";
 import Header from "@/app/components/Header";
 import { Container } from "@/app/components/Container/Container";
-import { getBlog, getPostComments } from "@/app/utils/supabaseFunctions";
+import {
+  getBlog,
+  getPostComments,
+  OptionUserType,
+  UserType,
+} from "@/app/utils/supabaseFunctions";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import BlogContents from "./BlogContents";
@@ -42,17 +47,19 @@ const page = async (params: PageParams) => {
   if (!getBlogData) {
     notFound();
   }
+  const { user_id, User: users } = getBlogData;
+  const user = users ? (users as OptionUserType) : { name: "", image: "" };
+  const userThumbnail = user.image || "";
   const { data: postComments } = await getPostComments(id); // 記事に紐づいたコメントデータ取得
-  const { user_id } = getBlogData;
   return (
     <>
       <Header page="Blog"></Header>
       <Container>
         <main>
           {/** メインコンテンツ */}
-          <BlogContents blog={getBlogData} />
+          <BlogContents blog={getBlogData} thumb={userThumbnail} />
           {/** その他の記事一覧 */}
-          <MorePosts user_id={user_id} />
+          <MorePosts user_id={user_id} post_id={id} />
           {/** コメント一覧 */}
           <BlogCommentsProvider>
             <Comments post_id={id} postComments={postComments} />
