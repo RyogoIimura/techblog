@@ -6,7 +6,18 @@ const nextConfig = {
 			'rfbshavdgwysigcizyjl.supabase.co',
 			"lh3.googleusercontent.com",
 		],
-	},
+    },
+      async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/home',
+        permanent: true,
+      },
+    ];
+  },
+
+
 };
 
 export default nextConfig;
