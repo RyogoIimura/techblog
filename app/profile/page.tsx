@@ -1,13 +1,14 @@
-"use client";
 import Head from "next/head";
 import React from "react";
 import { Container } from "../components/Container/Container";
 import Header from "../components/Header";
 import { CardItem } from "../components/CardItem/CardItem";
-import { getLabelTime } from "../utils/dateFormat";
+import { getFormatLabelTime, getLabelTime } from "../utils/dateFormat";
 import styles from "../home/home.module.css";
-// import "./profile.modules.css";
-// import { Pagenation } from "../components/Pagenation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+import { notFound } from "next/navigation";
+import { supabase } from "../utils/supabase";
 
 const testArray = [
   {
@@ -66,7 +67,42 @@ const testArray = [
   },
 ];
 
-const page = () => {
+type ProfilePostType = {
+  id: string;
+  title: string;
+  content: string;
+  image_path: string;
+  created_at: string;
+};
+
+const page = async () => {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    notFound();
+  }
+  const name = session.user?.name;
+  if (!name) {
+    notFound();
+  }
+  const { data: user } = await supabase
+    .from("User")
+    .select("id")
+    .eq("name", name)
+    .single();
+
+  const getPosts = async (
+    id: string
+  ): Promise<{ data: Array<ProfilePostType> | null }> => {
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("user_id", id)
+      .order("created_at", { ascending: false });
+
+    return { data };
+  };
+  const { data: posts } = await getPosts(user?.id);
+  console.log(posts);
   return (
     <>
       <Head>
@@ -79,25 +115,29 @@ const page = () => {
             <h1 className=" text-gray-300 leading-normal text-center text-4xl sm:text-5xl md:text-6xl pt-4 font-bold">
               Your Post
             </h1>
-            <div className="mx-auto mt-8 md:mt-20 mb-0">
-              <ul className={styles.postWrap}>
-                {testArray.map((item, index) => (
-                  <CardItem
-                    key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    date={getLabelTime(item.time)}
-                    imageUrl="/images/dummy.png"
-                    category={item.category}
-                    author={item.author}
-                    description={item.description}
-                    alt="アイキャッチ"
-                    page="create"
-                  />
-                ))}
-              </ul>
-            </div>
-            {/* <Pagenation /> */}
+            {posts && (
+              <div className="mx-auto mt-8 md:mt-20 mb-0">
+                <ul className={styles.postWrap}>
+                  {posts.map((post) => {
+                    console.log(post.created_at);
+                    return (
+                      <CardItem
+                        key={post.id}
+                        id={post.id}
+                        title={post.title}
+                        date={getFormatLabelTime(post.created_at)}
+                        imageUrl={post.image_path}
+                        category=""
+                        author={name}
+                        description={post.content}
+                        alt="アイキャッチ"
+                        page="create"
+                      />
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
           </article>
         </main>
       </Container>
