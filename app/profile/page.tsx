@@ -102,7 +102,6 @@ const page = async () => {
     return { data };
   };
   const { data: posts } = await getPosts(user?.id);
-  console.log(posts);
   return (
     <>
       <Head>
@@ -119,7 +118,6 @@ const page = async () => {
               <div className="mx-auto mt-8 md:mt-20 mb-0">
                 <ul className={styles.postWrap}>
                   {posts.map((post) => {
-                    console.log(post.created_at);
                     return (
                       <CardItem
                         key={post.id}
