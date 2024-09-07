@@ -6,6 +6,9 @@ const nextConfig = {
 			'rfbshavdgwysigcizyjl.supabase.co',
 			"lh3.googleusercontent.com",
 		],
+
+    images: {
+        domains: ['picsum.photos', 'rfbshavdgwysigcizyjl.supabase.co', 'lh3.googleusercontent.com'],
     },
       async redirects() {
     return [
