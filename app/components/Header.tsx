@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 
 import { poppins } from "../utils/fonts";
 import { HeaderButton } from "./HeaderButton";
-import { CommonContext } from "../contexts/CommonContext";
 
 type HeaderProps = {
   page: string;
@@ -13,10 +12,7 @@ type HeaderProps = {
 
 const Header = (props: HeaderProps) => {
   const { page, onClick } = props;
-  const context = useContext(CommonContext);
-  const { signInFlag } = context;
-  const { data: session } = useSession();
-  // console.log(session);
+  const { data: session } = useSession()
 
   const headerButtonChange = () => {
     if (page === "Write Blog") {
