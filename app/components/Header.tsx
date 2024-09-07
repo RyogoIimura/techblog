@@ -11,16 +11,8 @@ type HeaderProps = {
 };
 
 const Header = (props: HeaderProps) => {
-<<<<<<< HEAD
-  const { page } = props;
-  const { data: session } = useSession()
-=======
   const { page, onClick } = props;
-  const context = useContext(CommonContext);
-  const { signInFlag } = context;
-  const { data: session } = useSession();
-  // console.log(session);
->>>>>>> main
+  const { data: session } = useSession()
 
   const headerButtonChange = () => {
     if (page === "Write Blog") {
