@@ -1,11 +1,11 @@
-// app/home/PostList.tsx
+// app/home/PostListComponent.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { CardItem } from '../components/CardItem/CardItem';
-import styles from './home.module.css';
+import { CardItem } from "../components/CardItem/CardItem";
 import { getAllPosts } from '../utils/supabaseFunctions';
+import styles from './home.module.css';
 
 interface Post {
   id: number;
@@ -14,6 +14,7 @@ interface Post {
   category: string;
   author: string;
   description: string;
+  image_path: string;
 }
 
 export default function PostList() {
@@ -27,13 +28,13 @@ export default function PostList() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const items = await getAllPosts();
-        setPosts(items!);
-        setFilteredPosts(items!);
-        const total = Math.ceil(items!.length / itemsPerPage);
+        const data = await getAllPosts();
+        setPosts(data!);
+        setFilteredPosts(data!);
+        const total = Math.ceil(data!.length / itemsPerPage);
         setTotalPages(total);
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
 
@@ -41,15 +42,11 @@ export default function PostList() {
   }, []);
 
   useEffect(() => {
-    const page = searchParams.get('page');
     const search = searchParams.get('search');
-
-    if (page) {
-      setCurrentPage(parseInt(page, 10));
-    }
+    const page = searchParams.get('page');
 
     if (search) {
-      const filtered = posts.filter((post) =>
+      const filtered = posts.filter((post) => 
         post.title.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredPosts(filtered);
@@ -58,6 +55,10 @@ export default function PostList() {
       setFilteredPosts(posts);
       setTotalPages(Math.ceil(posts.length / itemsPerPage));
     }
+
+    if (page) {
+      setCurrentPage(parseInt(page, 10));
+    }
   }, [searchParams, posts]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -65,17 +66,17 @@ export default function PostList() {
   const currentItems = filteredPosts.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('page', pageNumber.toString());
-    window.history.pushState({}, '', url.toString());
     setCurrentPage(pageNumber);
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", pageNumber.toString());
+    window.history.pushState({}, "", url.toString());
   };
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
     <>
-      <div className="mx-auto mt-0 mb-0">
+      <div className='mx-auto mt-0 mb-0'>
         <ul className={styles.postWrap}>
           {currentItems.map((item) => (
             <CardItem
@@ -83,17 +84,17 @@ export default function PostList() {
               id={item.id}
               title={item.title}
               date={item.time}
-              imageUrl="/images/dummy.png"
+              imageUrl={item.image_path || "/images/dummy.png"}
               category={item.category}
               author={item.author}
               description={item.description}
-              alt="サムネイル"
+              alt='サムネイル'
             />
           ))}
         </ul>
       </div>
 
-      <div className="pagination flex justify-between items-center max-w-md mx-auto">
+      <div className='pagination flex justify-between items-center max-w-md mx-auto'>
         <button
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
@@ -104,7 +105,7 @@ export default function PostList() {
           <button
             key={page}
             className={`w-14 h-14 text-center flex items-center justify-center rounded-full border-2 border-black ${
-              page === currentPage ? 'bg-black text-white' : 'bg-white'
+              page === currentPage ? "bg-black text-white" : "bg-white"
             }`}
             onClick={() => handlePageChange(page)}
           >

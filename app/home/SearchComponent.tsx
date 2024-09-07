@@ -3,12 +3,12 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './home.module.css';
-import searchIcon from '/public/images/search_icon.svg';
 import { useRouter } from 'next/navigation';
+import searchIcon from "/public/images/search_icon.svg";
+import styles from './home.module.css';
 
 export default function SearchComponent() {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState("");
   const router = useRouter();
 
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,17 +23,17 @@ export default function SearchComponent() {
   return (
     <form onSubmit={handleSubmit} className={styles.searchBox}>
       <input
-        type="text"
-        placeholder="検索ワード"
+        type='text'
+        placeholder='検索ワード'
         value={searchKeyword}
         onChange={handleSearchInput}
       />
-      <button type="submit">
+      <button type='submit'>
         <Image
           src={searchIcon}
           width={24}
-          style={{ height: 'auto' }}
-          alt="検索"
+          style={{ height: "auto" }}
+          alt='検索'
         />
       </button>
     </form>
