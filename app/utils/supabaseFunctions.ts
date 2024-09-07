@@ -18,6 +18,17 @@ export type GetBlogType = {
     title: string;
     content: string;
     image_path: string | null;
+}
+
+
+export const getAllPosts = async () => {
+    const posts = await supabase.from("posts").select("*");
+    return posts.data;
+}
+
+export const getBlog = async (id: string): Promise<{ data: GetBlogType | null; }> => {
+    const { data } = await supabase.from("posts").select("id,user_id,title,content,image_path").eq('id', id).limit(1).single();
+    return { data }
     User?: Array<OptionUserType>;
 }
 
